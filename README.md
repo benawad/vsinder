@@ -7,4 +7,5 @@ A dating app for programmers where you swipe on code.
 ## Get the app for push notifications
 
 [iOS](https://apps.apple.com/us/app/vsinder/id1542523079?itsct=apps_box&itscg=30200)
+
 [Android](https://play.google.com/store/apps/details?id=com.benawad.vsinder)
