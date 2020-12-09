@@ -1,13 +1,22 @@
 # VSinder
 
-A dating app for programmers where you swipe on code.
+### A Dating App for Programmers: Swipe the Code.
 
 ![swiping code](https://media.giphy.com/media/Vhw2lTXYI6FhGrbE2G/giphy.gif)
+----------------------------------------------
 
-Context: https://youtu.be/bfd8RyAJh6c
+## Find the Creation here: 
+<a href="https://youtu.be/bfd8RyAJh6c">
+  <img src="https://img.icons8.com/ios/2x/youtube-play--v2.gif" height="50px" width="50px"/>
+</a>
 
-## Get the app for push notifications
+---------------------------------------------
+## If you like *Push Notifications*, Click your preference ->
 
-[iOS](https://apps.apple.com/us/app/vsinder/id1542523079?itsct=apps_box&itscg=30200)
+<a href="https://apps.apple.com/us/app/vsinder/id1542523079?itsct=apps_box&itscg=30200">
+  <img src="https://img.icons8.com/ios-filled/2x/ios-logo.png" height="50px" width="50px"/>
+</a>
 
-[Android](https://play.google.com/store/apps/details?id=com.benawad.vsinder)
+<a href="https://play.google.com/store/apps/details?id=com.benawad.vsinder">
+  <img src="https://img.icons8.com/ios-filled/2x/android-os.png" height="50px" width="50px"/>
+</a>
