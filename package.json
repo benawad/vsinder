@@ -1,0 +1,110 @@
+{
+  "name": "vsinder",
+  "publisher": "benawad",
+  "displayName": "vsinder",
+  "icon": "media/icon.png",
+  "description": "Dating App for VSCode",
+  "version": "1.2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/benawad/vsinder"
+  },
+  "engines": {
+    "vscode": "^1.51.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onView:vsinder-sidebar",
+    "onCommand:vsinder.addCodeToProfile",
+    "onCommand:vsinder.authenticate",
+    "onCommand:vsinder.reloadSidebar"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "vsinder-sidebar-view",
+          "title": "VSinder",
+          "icon": "media/heart.svg"
+        }
+      ]
+    },
+    "views": {
+      "vsinder-sidebar-view": [
+        {
+          "type": "webview",
+          "id": "vsinder-sidebar",
+          "name": "VSinder",
+          "icon": "media/heart.svg",
+          "contextualTitle": "VSinder"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "vsinder.addCodeToProfile",
+        "title": "Add Code to VSinder Profile",
+        "category": "VSinder"
+      },
+      {
+        "command": "vsinder.authenticate",
+        "title": "Authenticate",
+        "category": "VSinder"
+      },
+      {
+        "command": "vsinder.reloadSidebar",
+        "title": "Reload Sidebar Webview",
+        "category": "VSinder"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "yarn run compile",
+    "compile": "rollup -c && webpack --mode production",
+    "lint": "eslint src --ext ts",
+    "watch": "concurrently \"rollup -c -w\" \"webpack --mode development --watch\"",
+    "pretest": "yarn run compile && yarn run lint",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "^14.0.0",
+    "@rollup/plugin-node-resolve": "^8.0.0",
+    "@rollup/plugin-typescript": "^6.0.0",
+    "@tsconfig/svelte": "^1.0.0",
+    "@types/btoa": "^1.2.3",
+    "@types/glob": "^7.1.3",
+    "@types/googlemaps": "^3.40.3",
+    "@types/mocha": "^8.0.0",
+    "@types/node": "^12.11.7",
+    "@types/node-fetch": "^2.5.7",
+    "@types/polka": "^0.5.1",
+    "@types/vscode": "^1.51.0",
+    "@typescript-eslint/eslint-plugin": "^4.1.1",
+    "@typescript-eslint/parser": "^4.1.1",
+    "concurrently": "^5.3.0",
+    "eslint": "^7.9.0",
+    "glob": "^7.1.6",
+    "mocha": "^8.1.3",
+    "rollup": "^2.3.4",
+    "rollup-plugin-svelte": "^6.0.0",
+    "rollup-plugin-terser": "^7.0.0",
+    "svelte": "^3.0.0",
+    "svelte-check": "^1.0.0",
+    "svelte-preprocess": "^4.0.0",
+    "ts-loader": "^8.0.11",
+    "typescript": "^4.0.2",
+    "vscode-test": "^1.4.0",
+    "webpack": "^5.10.0",
+    "webpack-cli": "^4.2.0"
+  },
+  "dependencies": {
+    "btoa": "^1.2.1",
+    "date-fns": "^2.16.1",
+    "node-fetch": "^2.6.1",
+    "polka": "^0.5.2",
+    "reconnecting-websocket": "^4.4.0"
+  }
+}
