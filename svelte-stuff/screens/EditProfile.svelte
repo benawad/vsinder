@@ -141,7 +141,7 @@
       <div class="label">Gender:</div>
       <RadioGroup
         bind:value={data.gender}
-        options={[{ label: 'male', value: 'male' }, { label: 'female', value: 'female' }]} />
+        options={[{ label: 'male', value: 'male' }, { label: 'female', value: 'female' }, { label: 'non-binary', value: 'non-binary' }]} />
     </div>
     <div>
       <div class="label">Show me code from:</div>
