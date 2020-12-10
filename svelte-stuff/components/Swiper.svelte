@@ -125,10 +125,10 @@
       return;
     }
 
-    if (e.key === 'ArrowLeft') {
+    if (e.key === 'ArrowLeft' || e.key === 'h') {
       view(false);
       e.preventDefault();
-    } else if (e.key === 'ArrowRight') {
+    } else if (e.key === 'ArrowRight' || e.key === 'l') {
       view(true);
       e.preventDefault();
     }
