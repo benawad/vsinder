@@ -103,7 +103,7 @@
         required
         bind:value={data.month}
         name="month"
-        options={[{ value: '', label: 'Month' }, { value: '1', label: 'Jan' }, { value: '2', label: 'Feb' }, { value: '3', label: 'Mar' }, { value: '4', label: 'Apr' }, { value: '5', label: 'May' }, { value: '6', label: 'Jun' }, { value: '7', label: 'Jul' }, { value: '8', label: 'Aug' }, { value: '9', label: 'Sep' }, { value: '10', label: 'Oct' }, { value: '11', label: 'Nov' }, { value: '12', label: 'Dec' }]} />
+        options={[{ value: '', label: 'Month' }, { value: '0', label: 'Jan' }, { value: '1', label: 'Feb' }, { value: '2', label: 'Mar' }, { value: '3', label: 'Apr' }, { value: '4', label: 'May' }, { value: '5', label: 'Jun' }, { value: '6', label: 'Jul' }, { value: '7', label: 'Aug' }, { value: '8', label: 'Sep' }, { value: '9', label: 'Oct' }, { value: '10', label: 'Nov' }, { value: '11', label: 'Dec' }]} />
       <span />
       <SelectField
         required
@@ -198,7 +198,7 @@
         disabled = true;
         try {
           const { year, month, day, ...values } = data;
-          const { user } = await mutation('/user', { ...values, birthday: `${year}-${month.length === 1 ? '0' + month : month}-${day.length === 1 ? '0' + day : day}` }, { method: 'PUT' });
+          const { user } = await mutation('/user', { ...values, birthday: `${year}-${ ("0" + (parseInt(month) + 1)).slice(-2) }-${day.length === 1 ? '0' + day : day}` }, { method: 'PUT' });
           onNext(user);
         } catch {}
         disabled = false;
