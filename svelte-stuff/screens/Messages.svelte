@@ -50,7 +50,10 @@
 
   function onWebsocketEvent(e: MessageEvent) {
     const payload: WebsocketMessages = JSON.parse(e.data);
-    if (payload.type === "new-message") {
+    if (
+      payload.type === "new-message" &&
+      payload.message.senderId === user.id
+    ) {
       messages = [payload.message, ...messages];
     } else if (payload.type === "unmatch") {
       onUnmatch(payload.userId);
