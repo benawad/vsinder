@@ -1,5 +1,5 @@
 <script lang="ts">
-  export let icon: "heart" | "x" | "logout";
+  export let icon: "heart" | "x" | "logout" | "trash";
 </script>
 
 <style>
@@ -30,6 +30,16 @@
         fill-rule="evenodd"
         clip-rule="evenodd"
         d="M11.02 3.77v1.56l1-.99V2.5l-.5-.5h-9l-.5.5v.486L2 3v10.29l.36.46 5 1.72L8 15v-1h3.52l.5-.5v-1.81l-1-1V13H8V4.71l-.33-.46L4.036 3h6.984v.77zM7 14.28l-4-1.34V3.72l4 1.34v9.22zm6.52-5.8H8.55v-1h4.93l-1.6-1.6.71-.7 2.47 2.46v.71l-2.49 2.48-.7-.7 1.65-1.65z" /></svg>
+  {:else if icon === 'trash'}
+    <svg
+      width="24"
+      height="24"
+      viewBox="0 0 16 16"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="currentColor"><path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M10 3h3v1h-1v9l-1 1H4l-1-1V4H2V3h3V2a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v1zM9 2H6v1h3V2zM4 13h7V4H4v9zm2-8H5v7h1V5zm1 0h1v7H7V5zm2 0h1v7H9V5z" /></svg>
   {:else}
     <svg
       width="24"

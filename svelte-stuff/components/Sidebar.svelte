@@ -143,6 +143,12 @@
           state.data = { ...state.data, ...message.data };
         }
         break;
+      case "account-deleted":
+        accessToken = "";
+        refreshToken = "";
+        state = { page: "login" };
+        currentUser = null;
+        break;
       case "login-complete":
         accessToken = message.payload.accessToken;
         refreshToken = message.payload.refreshToken;

@@ -3,7 +3,7 @@ import { authenticate } from "./authenticate";
 import { accessTokenKey, apiBaseUrl, refreshTokenKey } from "./constants";
 import { FlairProvider } from "./FlairProvider";
 import { getNonce } from "./getNonce";
-import { mutationNoErr } from "./mutation";
+import { mutation, mutationNoErr } from "./mutation";
 import { placesApiKey } from "./places-api-key";
 import { SnippetStatus } from "./SnippetStatus";
 import { SwiperPanel } from "./SwiperPanel";
@@ -57,6 +57,26 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
         case "logout": {
           await Util.globalState.update(accessTokenKey, "");
           await Util.globalState.update(refreshTokenKey, "");
+          break;
+        }
+        case "delete-account": {
+          const y = await vscode.window.showInformationMessage(
+            "Are you sure you want to delete your account?",
+            "yes",
+            "no"
+          );
+          if (y === "yes") {
+            try {
+              await mutation("/account/delete", {});
+              await Util.globalState.update(accessTokenKey, "");
+              await Util.globalState.update(refreshTokenKey, "");
+              webviewView.webview.postMessage({
+                command: "account-deleted",
+                payload: {},
+              });
+              vscode.window.showInformationMessage("successfully deleted");
+            } catch {}
+          }
           break;
         }
         case "show-snippet-status": {

@@ -9,6 +9,7 @@
   import CommentIcon from "../ui/CommentIcon.svelte";
   import Flair from "../ui/Flair.svelte";
   import LoadingSpinner from "../ui/LoadingSpinner.svelte";
+  import SmallButton from "../ui/SmallButton.svelte";
 
   export let onEditCode: (x: string[]) => void;
   export let onEditProfile: () => void;
@@ -50,8 +51,10 @@
   }
   .logout-container {
     margin-top: auto;
-    width: 32px;
+    width: 100%;
     padding-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
   }
 
   .top-container {
@@ -123,14 +126,22 @@
         }}>start swiping</button>
     {/if}
     <div class="logout-container">
-      <ButtonIcon
-        icon="logout"
+      <div style="width: 32px">
+        <ButtonIcon
+          icon="logout"
+          on:click={() => {
+            accessToken = '';
+            refreshToken = '';
+            tsvscode.postMessage({ type: 'logout' });
+            onLogout();
+          }} />
+      </div>
+      <SmallButton
         on:click={() => {
-          accessToken = '';
-          refreshToken = '';
-          tsvscode.postMessage({ type: 'logout' });
-          onLogout();
-        }} />
+          tsvscode.postMessage({ type: 'delete-account' });
+        }}>
+        delete account
+      </SmallButton>
     </div>
   </div>
 {:else}
