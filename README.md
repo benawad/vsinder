@@ -14,9 +14,9 @@
 ## If you like *Push Notifications*, Click your preference ->
 
 <a href="https://apps.apple.com/us/app/vsinder/id1542523079?itsct=apps_box&itscg=30200">
-  <img src="https://img.icons8.com/ios-filled/2x/ios-logo.png" height="50px" width="50px"/>
+  <img src="https://img.icons8.com/dusk/2x/ios-logo.png" height="50px" width="50px"/>
 </a>
 
 <a href="https://play.google.com/store/apps/details?id=com.benawad.vsinder">
-  <img src="https://img.icons8.com/ios-filled/2x/android-os.png" height="50px" width="50px"/>
+  <img src="https://img.icons8.com/dusk/2x/android.png" height="50px" width="50px"/>
 </a>
