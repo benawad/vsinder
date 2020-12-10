@@ -64,7 +64,7 @@
   </div>
   <div>
     <a
-      href="https://carbon.now.sh/?code={encodeURIComponent(data.code)}&l={encodeURIComponent(data.language)}&t={encodeURIComponent(data.theme)}&fm={encodeURIComponent(data.fontFamily)}&fs=14px">click
+      href="https://dreamy-ptolemy-eb4e80.netlify.app/?code={encodeURIComponent(data.code)}&l={encodeURIComponent(data.language)}&t={encodeURIComponent(data.theme)}&fm={encodeURIComponent(data.fontFamily)}&fs=14px">click
       to preview</a>
     <div class="note">
       note: the canvas will be set to width 400px and height
