@@ -7,16 +7,11 @@
   import DoOnMount from "./DoOnMount.svelte";
   import LoadingButton from "../ui/LoadingButton.svelte";
   import LoadingSpinner from "../ui/LoadingSpinner.svelte";
-  import SmallButton from "../ui/SmallButton.svelte";
-  import CodeImg from "../ui/CodeImg.svelte";
-  import Avatar from "../ui/Avatar.svelte";
   import CodeCard from "../ui/CodeCard.svelte";
   import ButtonIcon from "../ui/ButtonIcon.svelte";
-  import { fly } from "svelte/transition";
-  import { linear } from "svelte/easing";
   import OnChange from "./OnChange.svelte";
-  import type { da } from "date-fns/locale";
   import AnimateCardWrapper from "./AnimateCardWrapper.svelte";
+  import MediaQuery from "./MediaQuery.svelte";
 
   let loadingState: "init" | "more" | "ready" = "init";
   let dataToAnimate: {
@@ -112,10 +107,19 @@
 <style>
   .center {
     margin-top: 10px;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+  }
+  .center-vertical {
+    margin-top: 10px;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
   }
 </style>
 
@@ -150,45 +154,49 @@
     <div>ArrowRight: Like</div>
     <div>Spacebar: Next photo</div>
   </div>
-  <div class="center">
-    <div style="position: relative;">
+  <MediaQuery query="screen and (min-height: 700px)" let:matches>
+    <div class={matches ? 'center' : 'center-vertical'}>
       {#if dataToAnimate}
-        <AnimateCardWrapper direction={dataToAnimate.direction}>
-          <CodeCard
-            stamp={dataToAnimate.direction === 'left' ? 'nope' : 'liked'}
-            profile={dataToAnimate.profile} />
-        </AnimateCardWrapper>
-        <OnChange
-          v={dataToAnimate}
-          fn={() => {
-            dataToAnimate = null;
-          }} />
+        <div style="position: relative;">
+          <AnimateCardWrapper direction={dataToAnimate.direction}>
+            <CodeCard
+              stamp={dataToAnimate.direction === 'left' ? 'nope' : 'liked'}
+              profile={dataToAnimate.profile} />
+          </AnimateCardWrapper>
+          <OnChange
+            v={dataToAnimate}
+            fn={() => {
+              dataToAnimate = null;
+            }} />
+        </div>
       {/if}
       <CodeCard bind:profile={profiles[0]} />
+      <div>
+        <div style="display: flex; margin-top: 20px;">
+          <ButtonIcon
+            on:click={() => {
+              view(false);
+            }}
+            icon="x" />
+          <div style="width: 70px;" />
+          <ButtonIcon
+            on:click={() => {
+              view(true);
+            }}
+            icon="heart" />
+        </div>
+        <div style="margin-top: 30px;">
+          <button
+            on:click={() => {
+              tsvscode.postMessage({
+                type: 'report',
+                value: { userId: profiles[0].id, unmatchOrReject: 'reject' },
+              });
+            }}
+            style="padding-left: 10px; padding-right: 10px;">Report
+            {profiles[0].displayName}</button>
+        </div>
+      </div>
     </div>
-    <div style="display: flex; margin-top: 20px;">
-      <ButtonIcon
-        on:click={() => {
-          view(false);
-        }}
-        icon="x" />
-      <div style="width: 70px;" />
-      <ButtonIcon
-        on:click={() => {
-          view(true);
-        }}
-        icon="heart" />
-    </div>
-    <div style="margin-top: 30px;">
-      <button
-        on:click={() => {
-          tsvscode.postMessage({
-            type: 'report',
-            value: { userId: profiles[0].id, unmatchOrReject: 'reject' },
-          });
-        }}
-        style="padding-left: 10px; padding-right: 10px;">Report
-        {profiles[0].displayName}</button>
-    </div>
-  </div>
+  </MediaQuery>
 {/if}
