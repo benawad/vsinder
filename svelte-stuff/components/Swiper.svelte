@@ -146,8 +146,8 @@
 {:else}
   <div style="position: absolute;">
     <div style="margin-bottom: 4px;">Keyboard shortcuts:</div>
-    <div>ArrowLeft: Nope</div>
-    <div>ArrowRight: Like</div>
+    <div>ArrowLeft or h: Nope</div>
+    <div>ArrowRight or l: Like</div>
     <div>Spacebar: Next photo</div>
   </div>
   <div class="center">
