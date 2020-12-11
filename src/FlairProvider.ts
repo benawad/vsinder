@@ -1,29 +1,37 @@
-import * as fs from "fs";
-import * as vscode from "vscode";
-import btoa from "btoa";
+const flairMap = {
+  kubernetes: "kubernetes.png",
+  python: "python.png",
+  flutter: "flutter.png",
+  angular: "angular.png",
+  cpp: "cpp.png",
+  haskell: "haskell.png",
+  java: "java.png",
+  rust: "rust.png",
+  vue: "vue.png",
+  javascript: "javascript.png",
+  go: "go.png",
+  cSharp: "cSharp.png",
+  html: "html.png",
+  swift: "swift.png",
+  react: "react.png",
+  kafka: "kafka.png",
+  c: "c.png",
+  typescript: "typescript.png",
+  css: "css.png",
+  dart: "dart.png",
+  svelte: "svelte.png",
+  kotlin: "kotlin.png",
+};
 
 export class FlairProvider {
-  static extensionUri: vscode.Uri;
-  static flairMap: Record<string, string> = {};
-  static flairUriMap: Record<string, vscode.Uri> = {};
   static javascriptMapString = "";
-  static init() {
-    const flairPath = vscode.Uri.joinPath(this.extensionUri, "media", "flairs");
-    const files = fs.readdirSync(flairPath.fsPath);
-    files.forEach((f) => {
-      const uri = vscode.Uri.joinPath(this.extensionUri, "media", "flairs", f);
-      const content = fs.readFileSync(uri.fsPath, { encoding: "utf-8" });
-      const flairName = f.split(".")[0];
-      this.flairMap[flairName] = "data:image/svg+xml;base64," + btoa(content);
-      this.flairUriMap[flairName] = uri;
-    });
-  }
-
   static getJavascriptMapString() {
     if (!this.javascriptMapString) {
       return `
       const flairMap = {
-        ${Object.entries(this.flairMap).map(([k, v]) => `"${k}": "${v}"`)}
+        ${Object.entries(flairMap).map(
+          ([k, v]) => `"${k}": "https://flair.benawad.com/${v}"`
+        )}
       }
       `;
     }

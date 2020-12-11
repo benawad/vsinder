@@ -2,19 +2,15 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from "vscode";
 import { authenticate } from "./authenticate";
-import { FlairProvider } from "./FlairProvider";
 import { languageIdMap } from "./languageIdMap";
 import { SidebarProvider } from "./SidebarProvider";
 import { SnippetStatus } from "./SnippetStatus";
-import { SwiperPanel } from "./SwiperPanel";
 import { Util } from "./Util";
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
   Util.globalState = context.globalState;
-  FlairProvider.extensionUri = context.extensionUri;
-  FlairProvider.init();
   SnippetStatus.createSnippetStatus();
   const sidebarProvider = new SidebarProvider(context.extensionUri);
   context.subscriptions.push(
