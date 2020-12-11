@@ -124,6 +124,10 @@
         on:click={() => {
           tsvscode.postMessage({ type: 'start-swiping' });
         }}>start swiping</button>
+      <div style="margin-top: 40px;">
+        (To change your profile picture, you need to change it on GitHub then
+        logout and login again)
+      </div>
     {/if}
     <div class="logout-container">
       <div style="width: 32px">
