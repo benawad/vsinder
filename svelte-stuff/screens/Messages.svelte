@@ -160,6 +160,9 @@
     </div>
     <form
       on:submit|preventDefault={async () => {
+        if (!text) {
+          return;
+        }
         try {
           const { message } = await mutation(`/message`, {
             recipientId: user.id,
