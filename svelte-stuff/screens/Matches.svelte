@@ -12,7 +12,7 @@
     Message,
     WebsocketMessages,
   } from "../shared/types";
-  import { dtToHumanStr } from "../shared/utils";
+  import { dtToHumanStr, getUserIdOrder } from "../shared/utils";
   import LoadingSpinner from "../ui/LoadingSpinner.svelte";
   import { getSocket } from "../shared/io";
   import Avatar from "../ui/Avatar.svelte";
@@ -84,6 +84,11 @@
     try {
       const r: MatchesResponse = await query("/matches/" + cursor);
       matches = r.matches.sort(compareMatches);
+      if (currentUser) {
+        currentUser.unreadMatchUserIds = matches
+          .filter((x) => !x.read)
+          .map((x) => getUserIdOrder(x.userId, currentUser!.id));
+      }
     } catch {}
     loading = false;
   }

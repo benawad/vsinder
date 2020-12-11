@@ -354,6 +354,6 @@
       state = s;
     }}
     {currentUserIsLoading}
-    {currentUser}
+    bind:currentUser
     bind:state />
 {/if}
