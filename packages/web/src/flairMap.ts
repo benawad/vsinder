@@ -21,4 +21,5 @@ export const flairMap = {
   dart: "dart.png",
   svelte: "svelte.png",
   kotlin: "kotlin.png",
+  ruby: "ruby.png"
 };
