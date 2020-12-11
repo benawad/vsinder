@@ -17,6 +17,7 @@
   export let myId: string;
   export let onMessage: (m: Message) => void;
   export let onUnmatch: (x: string) => void;
+  let loadingMessageSent = false;
   let loading = true;
   let isLoadingMore = false;
   let unmatched = false;
@@ -159,10 +160,12 @@
       {/if}
     </div>
     <form
+      disabled={loadingMessageSent}
       on:submit|preventDefault={async () => {
         if (!text) {
           return;
         }
+        loadingMessageSent = true;
         try {
           const { message } = await mutation(`/message`, {
             recipientId: user.id,
@@ -172,6 +175,7 @@
           messages = [message, ...messages];
           onMessage(message);
         } catch {}
+        loadingMessageSent = false;
         text = '';
       }}>
       <input placeholder="Type a message" bind:value={text} />
