@@ -66,7 +66,7 @@
       global: u.global,
       flair: u.flair,
       year: "" + dt.getFullYear(),
-      month: "" + (dt.getMonth() + 1),
+      month: "" + dt.getMonth(),
       day: "" + dt.getDate(),
       location: u.location,
     };
