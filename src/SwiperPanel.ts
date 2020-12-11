@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
 import { accessTokenKey, apiBaseUrl, refreshTokenKey } from "./constants";
-import { FlairProvider } from "./FlairProvider";
+import { flairMap, FlairProvider } from "./FlairProvider";
 import { getNonce } from "./getNonce";
 import { mutationNoErr } from "./mutation";
 import { Util } from "./Util";
@@ -120,8 +120,11 @@ export class SwiperPanel {
         case "set-window-info": {
           const { displayName, flair } = data.value;
           this._panel.title = displayName;
-          if (flair in FlairProvider.flairUriMap) {
-            const both = FlairProvider.flairUriMap[flair];
+          if (flair in flairMap) {
+            const both = vscode.Uri.parse(
+              `https://flair.benawad.com/` +
+                flairMap[flair as keyof typeof flairMap]
+            );
             this._panel.iconPath = {
               light: both,
               dark: both,

@@ -1,4 +1,4 @@
-const flairMap = {
+export const flairMap = {
   kubernetes: "kubernetes.png",
   python: "python.png",
   flutter: "flutter.png",

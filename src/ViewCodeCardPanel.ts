@@ -1,6 +1,6 @@
 import * as vscode from "vscode";
 import { accessTokenKey, apiBaseUrl, refreshTokenKey } from "./constants";
-import { FlairProvider } from "./FlairProvider";
+import { flairMap, FlairProvider } from "./FlairProvider";
 import { getNonce } from "./getNonce";
 import { mutationNoErr } from "./mutation";
 import { Util } from "./Util";
@@ -199,8 +199,11 @@ export class ViewCodeCardPanel {
     );
 
     this._panel.title = this._userInfo.displayName;
-    if (this._userInfo.flair in FlairProvider.flairUriMap) {
-      const both = FlairProvider.flairUriMap[this._userInfo.flair];
+    if (this._userInfo.flair in flairMap) {
+      const both = vscode.Uri.parse(
+        `https://flair.benawad.com/` +
+          flairMap[this._userInfo.flair as keyof typeof flairMap]
+      );
       this._panel.iconPath = {
         light: both,
         dark: both,
