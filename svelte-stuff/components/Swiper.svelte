@@ -125,10 +125,10 @@
       return;
     }
 
-    if (e.key === 'ArrowLeft') {
+    if (e.key === 'ArrowLeft' || e.key === 'h') {
       view(false);
       e.preventDefault();
-    } else if (e.key === 'ArrowRight') {
+    } else if (e.key === 'ArrowRight' || e.key === 'l') {
       view(true);
       e.preventDefault();
     }
@@ -146,8 +146,8 @@
 {:else}
   <div style="position: absolute;">
     <div style="margin-bottom: 4px;">Keyboard shortcuts:</div>
-    <div>ArrowLeft: Nope</div>
-    <div>ArrowRight: Like</div>
+    <div>ArrowLeft or h: Nope</div>
+    <div>ArrowRight or l: Like</div>
     <div>Spacebar: Next photo</div>
   </div>
   <div class="center">
