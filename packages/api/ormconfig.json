@@ -1,0 +1,9 @@
+{
+  "type": "postgres",
+  "host": "localhost",
+  "port": 5432,
+  "database": "vsinder",
+  "entities": ["src/entities/**/*.ts"],
+  "migrations": ["src/migrations/**/*.ts"],
+  "subscribers": ["src/subscriber/**/*.ts"]
+}

@@ -1,0 +1,20 @@
+node_modules/**/*
+.expo/*
+npm-debug.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+.expo
+.expo-shared
+
+# macOS
+.DS_Store
+places-api-key.ts
+google-services.json
+dsn.ts
+.env
+api-copy.json
