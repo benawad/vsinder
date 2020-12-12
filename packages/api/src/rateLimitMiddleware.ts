@@ -11,6 +11,7 @@ export const rateLimitMiddleware = (
       next();
     })
     .catch(({ msBeforeNext }) => {
+      let tmpM = m;
       if (showTime) {
         let minutes = Math.floor(msBeforeNext / 1000 / 60);
         let hours = 0;
@@ -25,8 +26,8 @@ export const rateLimitMiddleware = (
         if (minutes) {
           parts.push(`${minutes} mins`);
         }
-        m += `resets in ${parts.join(" and ")}`;
+        tmpM += `resets in ${parts.join(" and ")}`;
       }
-      res.status(429).send(m);
+      res.status(429).send(tmpM);
     });
 };
