@@ -811,7 +811,8 @@ const main = async () => {
         blockDuration: 0,
         keyPrefix: "rl/view/",
       }),
-      `You've hit the rate limit of 500 swipes a day, come back tomorrow`
+      `You've hit the rate limit of 500 swipes, `,
+      true
     ),
     async (req: any, res, next) => {
       try {
