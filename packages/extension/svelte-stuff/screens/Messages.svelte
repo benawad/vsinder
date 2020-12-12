@@ -120,6 +120,14 @@
   form {
     padding: 0px var(--container-paddding);
   }
+  .display-name {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    margin-top: -5px;
+    cursor: pointer;
+  }
 </style>
 
 {#if unmatched}
@@ -131,6 +139,13 @@
 {:else if loading}
   <LoadingSpinner />
 {:else}
+  <h2
+    on:click={() => {
+      tsvscode.postMessage({ type: 'view-code-card', value: user });
+    }}
+    class="display-name">
+    {user.displayName}
+  </h2>
   <div class="panel">
     <div class="msg-container">
       {#each messageGroups as mg, i}

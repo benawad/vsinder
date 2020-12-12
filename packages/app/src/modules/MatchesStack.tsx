@@ -1,5 +1,6 @@
-import { createStackNavigator } from "@react-navigation/stack";
+import { createStackNavigator, HeaderTitle } from "@react-navigation/stack";
 import React from "react";
+import { TouchableOpacity } from "react-native-gesture-handler";
 import { useHeaderOptions } from "../hooks/useHeaderOptions";
 import { ReportUnMatchButton } from "../ui/ReportUnMatchButton";
 import { MatchesStackParamList } from "./MatchesStack/MatchesNav";
@@ -26,8 +27,16 @@ export const MatchesStack: React.FC = () => {
         component={ViewCardScreen}
       />
       <Stack.Screen
-        options={({ route }) => ({
-          title: route.params.displayName,
+        options={({ route, navigation }) => ({
+          headerTitle: (props) => (
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate("viewCard", { id: route.params.id })
+              }
+            >
+              <HeaderTitle {...props}>{route.params.displayName}</HeaderTitle>
+            </TouchableOpacity>
+          ),
           headerRight: ReportUnMatchButton,
         })}
         name="messages"
