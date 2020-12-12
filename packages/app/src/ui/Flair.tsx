@@ -28,7 +28,8 @@ export const flairMap = {
   dart: "dart.png",
   svelte: "svelte.png",
   kotlin: "kotlin.png",
-  ruby: "ruby.png"
+  ruby: "ruby.png",
+  ionic: "ionic.png"
 };
 
 export const Flair: React.FC<FlairProps> = ({ size = 24, name }) => {
