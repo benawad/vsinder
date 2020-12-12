@@ -125,6 +125,9 @@
     if (e.key === ' ') {
       onRightImage();
       e.preventDefault();
+    } else if (e.key === "ArrowUp") {
+        expanded = !expanded;
+        e.preventDefault();
     }
   }} />
 
