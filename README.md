@@ -14,7 +14,7 @@ Context: https://youtu.be/bfd8RyAJh6c
 
 ## How to run locally
 
-### API (you'll need this if you want to run the extension or iOS/Android app)
+### API
 
 0. `packages/api`
 1. Have PostgreSQL running and create a db called `vsinder`
