@@ -89,6 +89,7 @@ const main = async () => {
     }
   };
 
+  const photoUrlTRegex = /(.+&t=)(\d+)/;
   passport.use(
     new GitHubStrategy(
       {
@@ -110,6 +111,21 @@ const main = async () => {
             profileUrl: profile.profileUrl,
             username: profile.username,
           };
+          if (data.photoUrl && data.photoUrl.includes("?")) {
+            let m;
+            if (
+              user?.photoUrl &&
+              user.photoUrl.includes(data.photoUrl) &&
+              (m = photoUrlTRegex.exec(user.photoUrl)) !== null
+            ) {
+              const t = parseInt(m[2]);
+              if (!Number.isNaN(t)) {
+                data.photoUrl = `${m[1]}${t + 1}`;
+              }
+            } else {
+              data.photoUrl += "&t=0";
+            }
+          }
           if (user) {
             await User.update(user.id, data);
           } else {
