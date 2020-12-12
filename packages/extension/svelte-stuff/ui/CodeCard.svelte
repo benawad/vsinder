@@ -71,20 +71,27 @@
     color: #fff;
   }
   .left {
-    position: absolute;
     top: 0;
     left: 0;
-    width: 50%;
+  }
+  .left,
+  .right {
     height: 100%;
+    position: absolute;
+    width: 50%;
     z-index: 1;
   }
+  .left.has-more,
+  .right.has-more {
+    cursor: pointer;
+  }
+  .left.has-more:hover,
+  .right.has-more:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
   .right {
-    position: absolute;
-    z-index: 1;
     top: 0;
     right: 0;
-    width: 50%;
-    height: 100%;
   }
   span {
     margin-left: 4px;
@@ -127,8 +134,8 @@
   {:else if stamp === 'liked'}
     <div class="liked">LIKED</div>
   {/if}
-  <div on:click={onLeftImage} class="left" />
-  <div on:click={onRightImage} class="right" />
+  <div on:click={onLeftImage} class={`left ${profile.codeImgIds.length > 1 && 'has-more'}`} />
+  <div on:click={onRightImage} class={`right ${profile.codeImgIds.length > 1 && 'has-more'}`} />
   <CodeImg id={profile.codeImgIds[profile.imgShowingIdx || 0]} />
   <div
     on:click={() => {
