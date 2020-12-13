@@ -50,7 +50,15 @@ export const ViewProfile: React.FC<ProfileStackNav<"viewProfile">> = ({
             alignItems: "center",
           }}
         >
-          <MyText style={{ marginTop: 10, fontSize: 22, fontWeight: "600" }}>
+          <MyText
+            numberOfLines={1}
+            style={{
+              marginTop: 10,
+              fontSize: 22,
+              fontWeight: "600",
+              flexShrink: 1,
+            }}
+          >
             {user.displayName}, {getAge(new Date(user.birthday))}
           </MyText>
           {user.flair ? (

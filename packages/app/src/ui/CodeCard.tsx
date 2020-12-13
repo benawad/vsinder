@@ -1,15 +1,11 @@
 import { Feather } from "@expo/vector-icons";
-import React, { useContext, useEffect, useState } from "react";
-import { Text, View, TouchableOpacity } from "react-native";
-import { useMutation } from "react-query";
+import React, { useContext, useState } from "react";
+import { Text, TouchableOpacity, View } from "react-native";
 import { Profile } from "../types";
 import { Avatar } from "./Avatar";
 import { CodeImage, codeImageWidth } from "./CodeImage";
 import { Flair } from "./Flair";
-import {
-  FullscreenImageZoomProvider,
-  FullscreenImageZoomContext,
-} from "./FullscreenImageZoom";
+import { FullscreenImageZoomContext } from "./FullscreenImageZoom";
 import { MyButton } from "./MyButton";
 import { ReportDialog } from "./ReportDialog";
 
@@ -84,7 +80,10 @@ export const CodeCard: React.FC<CodeCardProps> = ({
             >
               <View style={{ flex: 1 }}>
                 <View style={{ flexDirection: "row" }}>
-                  <Text numberOfLines={1} style={{ color: "#fff" }}>
+                  <Text
+                    numberOfLines={1}
+                    style={{ color: "#fff", flexShrink: 1 }}
+                  >
                     <Text
                       style={{
                         fontWeight: "800",
