@@ -157,7 +157,22 @@ export const LoginScreen: React.FC<AuthStackNav<"login">> = ({
                 login with email
               </MyButton>
             </>
-          ) : null}
+          ) : (
+            <MyButton
+              onPress={async () => {
+                const redirectUrl = await Linking.getInitialURL();
+                if (redirectUrl) {
+                  await WebBrowser.openAuthSessionAsync(
+                    `${apiBaseUrl}/auth/github/rn2`,
+                    redirectUrl
+                  );
+                }
+              }}
+              secondary
+            >
+              GitHub login 2 (if other one fails)
+            </MyButton>
+          )}
         </View>
       </Center>
     </ScreenWrapper>

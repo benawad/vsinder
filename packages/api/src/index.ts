@@ -249,6 +249,14 @@ const main = async () => {
     res.send(createTokens(user));
   });
 
+  router.get("/auth/github/rn2", (req, res, next) => {
+    const state = Buffer.from(JSON.stringify({ rn2: true })).toString("base64");
+    passport.authenticate("github", {
+      session: false,
+      state,
+    })(req, res, next);
+  });
+
   router.get("/auth/github/rn", (req, res, next) => {
     const state = Buffer.from(JSON.stringify({ rn: true })).toString("base64");
     passport.authenticate("github", {
@@ -274,15 +282,26 @@ const main = async () => {
         return;
       }
       const { state } = req.query;
-      const { rn } = JSON.parse(Buffer.from(state, "base64").toString());
-      if (rn) {
+      const { rn, rn2 } = JSON.parse(Buffer.from(state, "base64").toString());
+      if (rn2) {
+        const url = `${
+          __prod__
+            ? `vsinder://`
+            : `exp:${
+                process.env.SERVER_URL.replace("http:", "").split(":")[0]
+              }:19000/--/`
+        }tokens/${req.user.accessToken}/${req.user.refreshToken}`;
+        res.send(
+          `<a style="font-size: 40px;" href="${url}">click this link to finish login</a>`
+        );
+      } else if (rn) {
         res.redirect(
           `${
             __prod__
               ? `vsinder://`
               : `exp:${
                   process.env.SERVER_URL.replace("http:", "").split(":")[0]
-                }:19005/--/`
+                }:19000/--/`
           }tokens/${req.user.accessToken}/${req.user.refreshToken}`
         );
       } else {
