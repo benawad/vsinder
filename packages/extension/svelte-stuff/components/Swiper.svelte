@@ -149,7 +149,7 @@
     <div>ArrowLeft or h: Nope</div>
     <div>ArrowRight or l: Like</div>
     <div>ArrowUp: Expand bio</div>
-    <div>Spacebar: Next photo</div>
+    <div>Spacebar or ArrowDown: Next photo</div>
   </div>
   <div class="center">
     <div style="position: relative;">

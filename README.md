@@ -23,6 +23,7 @@ Context: https://youtu.be/bfd8RyAJh6c
 4. Run `yarn` to install deps
 5. Run `yarn watch` to compile TypeScript
 6. Run `yarn dev` to start server
+7. Run `yarn seed` to add dummy data to db
 
 ### Extension
 

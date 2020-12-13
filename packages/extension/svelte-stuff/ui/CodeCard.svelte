@@ -122,7 +122,7 @@
 
 <svelte:window
   on:keydown={(e) => {
-    if (e.key === ' ') {
+    if (e.key === ' ' || e.key === 'ArrowDown') {
       onRightImage();
       e.preventDefault();
     } else if (e.key === "ArrowUp") {
