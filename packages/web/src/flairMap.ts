@@ -15,7 +15,6 @@ export const flairMap = {
   swift: "swift.png",
   react: "react.png",
   kafka: "kafka.png",
-  php: "php.png",
   c: "c.png",
   typescript: "typescript.png",
   css: "css.png",
@@ -25,5 +24,6 @@ export const flairMap = {
   ruby: "ruby.png",
   tailwindcss: "tailwindcss.png",
   ionic: "ionic.png",
-  bash: "bash.png"
+  bash: "bash.png",
+  php: "php.png"
 };
