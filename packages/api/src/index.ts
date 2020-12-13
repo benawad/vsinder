@@ -284,15 +284,14 @@ const main = async () => {
       const { state } = req.query;
       const { rn, rn2 } = JSON.parse(Buffer.from(state, "base64").toString());
       if (rn2) {
-        const url = `${
-          __prod__
-            ? `vsinder://`
-            : `exp:${
-                process.env.SERVER_URL.replace("http:", "").split(":")[0]
-              }:19000/--/`
-        }tokens/${req.user.accessToken}/${req.user.refreshToken}`;
-        res.send(
-          `<a style="font-size: 40px;" href="${url}">click this link to finish login</a>`
+        res.redirect(
+          `${
+            __prod__
+              ? `vsinder://`
+              : `exp:${
+                  process.env.SERVER_URL.replace("http:", "").split(":")[0]
+                }:19000/--/`
+          }tokens2/${req.user.accessToken}/${req.user.refreshToken}`
         );
       } else if (rn) {
         res.redirect(

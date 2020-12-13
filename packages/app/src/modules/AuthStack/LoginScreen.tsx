@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import * as WebBrowser from "expo-web-browser";
 import * as Linking from "expo-linking";
 import { Platform, View } from "react-native";
@@ -24,6 +24,21 @@ export const LoginScreen: React.FC<AuthStackNav<"login">> = ({
   const [appleSignIn, setAppleSignIn] = useState(false);
   const [mutate] = useMutation(defaultMutationFn);
   const { editorBackground } = useTheme();
+  useEffect(() => {
+    const handleUrl = ({ url }: any) => {
+      const parts = url.split("/");
+      if (parts[parts.length - 3] === "tokens2") {
+        navigation.navigate("tokens", {
+          accessToken: parts[parts.length - 2],
+          refreshToken: parts[parts.length - 1],
+        });
+      }
+    };
+    Linking.addEventListener("url", handleUrl);
+    return () => {
+      Linking.removeEventListener("url", handleUrl);
+    };
+  }, [navigation]);
   return (
     <ScreenWrapper>
       <Modal
@@ -170,7 +185,7 @@ export const LoginScreen: React.FC<AuthStackNav<"login">> = ({
               }}
               secondary
             >
-              GitHub login 2 (if other one fails)
+              (if the one above fails click this)
             </MyButton>
           )}
         </View>
