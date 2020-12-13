@@ -33,7 +33,7 @@ export const ViewProfile: React.FC<ProfileStackNav<"viewProfile">> = ({
           width: "100%",
         }}
       >
-        <MyText>{user.numLikes} likes</MyText>
+        <MyText>{user.numLikes} likes received</MyText>
         <View style={{ height: 28, marginLeft: "auto", flexDirection: "row" }}>
           <Cog />
         </View>

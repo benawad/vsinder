@@ -69,7 +69,7 @@
 {:else if currentUser}
   <div class="top-container">
     <div class="header">
-      <div>{currentUser.numLikes} likes</div>
+      <div>{currentUser.numLikes} likes received</div>
       <CommentIcon
         on:click={() => onViewMatches()}
         n={currentUser.unreadMatchUserIds.length} />
