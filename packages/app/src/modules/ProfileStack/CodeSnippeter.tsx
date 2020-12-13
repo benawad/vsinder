@@ -1,6 +1,6 @@
 import { Formik } from "formik";
 import React, { useRef } from "react";
-import { ScrollView, View } from "react-native";
+import { Platform, ScrollView, View, Clipboard, Alert } from "react-native";
 import { showMessage } from "react-native-flash-message";
 import {
   fontOptions,
@@ -80,7 +80,7 @@ export const CodeSnippeter: React.FC<ProfileStackNav<"codeSnippeter">> = ({
           }
         }}
       >
-        {({ values, handleSubmit }) => {
+        {({ values, handleSubmit, setFieldValue }) => {
           return (
             <KeyboardAwareScrollView
               ref={scrollView}
@@ -118,6 +118,35 @@ export const CodeSnippeter: React.FC<ProfileStackNav<"codeSnippeter">> = ({
                   name="code"
                   label={`Code ${values.code.length}/600`}
                 />
+                {Platform.OS === "android" ? (
+                  <MyButton
+                    style={{ marginTop: 8 }}
+                    secondary
+                    onPress={() => {
+                      Alert.alert(
+                        "Paste from clipboard confirm",
+                        "This will paste the text on your clipboard and put it in the text area while respecting the original formatting (text currently in the text area will be cleared)",
+                        [
+                          {
+                            text: "Cancel",
+                            onPress: () => {},
+                            style: "cancel",
+                          },
+                          {
+                            text: "OK",
+                            onPress: () =>
+                              Clipboard.getString().then((s) => {
+                                setFieldValue("code", s);
+                              }),
+                          },
+                        ],
+                        { cancelable: false }
+                      );
+                    }}
+                  >
+                    paste with formatting
+                  </MyButton>
+                ) : null}
               </FormSpacer>
               <MyButton onPress={() => handleSubmit()}>
                 save code snippet
