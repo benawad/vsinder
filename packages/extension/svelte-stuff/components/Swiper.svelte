@@ -148,6 +148,7 @@
     <div style="margin-bottom: 4px;">Keyboard shortcuts:</div>
     <div>ArrowLeft or h: Nope</div>
     <div>ArrowRight or l: Like</div>
+    <div>ArrowUp: Expand bio</div>
     <div>Spacebar: Next photo</div>
   </div>
   <div class="center">
