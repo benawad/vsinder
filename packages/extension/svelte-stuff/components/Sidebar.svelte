@@ -260,6 +260,10 @@
         }
       }} />
   {:else if state.page === 'login'}
+    <div style="margin-bottom: 40px;">
+      By tapping login with Github, you agree to our
+      <a href="https://www.vsinder.com/terms">terms</a>
+    </div>
     <button
       on:click={() => {
         tsvscode.postMessage({ type: 'login' });
