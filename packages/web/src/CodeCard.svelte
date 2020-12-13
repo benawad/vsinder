@@ -116,7 +116,7 @@
 
 <svelte:window
   on:keydown={(e) => {
-    if (e.key === ' ') {
+    if (e.code === 'Space') {
       onRightImage();
       e.preventDefault();
     }
