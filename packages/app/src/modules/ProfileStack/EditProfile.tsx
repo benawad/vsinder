@@ -76,6 +76,7 @@ export const EditProfile: React.FC<ProfileStackNav<"editProfile">> = ({
             const { user } = await mutate(["/user", d, "PUT"]);
             cache.setQueryData("/me", { user });
             cache.invalidateQueries("/feed");
+            cache.invalidateQueries("/matches/0");
             if (data!.user!.codeImgIds.length) {
               navigation.goBack();
             } else {
@@ -154,7 +155,7 @@ export const EditProfile: React.FC<ProfileStackNav<"editProfile">> = ({
                       options={[
                         { label: "male", value: "male" },
                         { label: "female", value: "female" },
-                        { label: "non-binary", value: "non-binary" }
+                        { label: "non-binary", value: "non-binary" },
                       ]}
                     />
                   </FormSpacer>

@@ -1,4 +1,9 @@
-import React, { useEffect } from "react";
+import { useFocusEffect } from "@react-navigation/native";
+import {
+  dismissAllNotificationsAsync,
+  getPresentedNotificationsAsync,
+} from "expo-notifications";
+import React, { useEffect, useRef } from "react";
 import { FlatList, TouchableOpacity, View } from "react-native";
 import { useQuery, useQueryCache } from "react-query";
 import { useOnWebSocket } from "../../hooks/useOnWebSocket";
@@ -95,6 +100,18 @@ export const MatchesScreen: React.FC<MatchesStackNav<"matchy">> = ({
       });
     }
   }, [data?.matches]);
+
+  const isClearing = useRef(false);
+  useFocusEffect(() => {
+    getPresentedNotificationsAsync().then((x) => {
+      if (x.length && !isClearing.current) {
+        isClearing.current = true;
+        dismissAllNotificationsAsync().finally(() => {
+          isClearing.current = false;
+        });
+      }
+    });
+  });
 
   if (isLoading) {
     return <FullscreenLoading />;

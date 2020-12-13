@@ -1,20 +1,18 @@
-import React, { useState } from "react";
-import * as WebBrowser from "expo-web-browser";
-import * as Linking from "expo-linking";
-import { Platform, View } from "react-native";
-import { apiBaseUrl } from "../../constants";
-import { Center } from "../../ui/Center";
-import { MyButton } from "../../ui/MyButton";
-import { ScreenWrapper } from "../../ui/ScreenWrapper";
-import { AuthStackNav } from "./AuthNav";
-import { showMessage } from "react-native-flash-message";
 import * as AppleAuthentication from "expo-apple-authentication";
-import { useMutation } from "react-query";
-import { defaultMutationFn } from "../../Providers";
-import { MyText } from "../../ui/MyText";
+import * as Linking from "expo-linking";
+import * as WebBrowser from "expo-web-browser";
+import React, { useEffect, useState } from "react";
+import { Platform, View } from "react-native";
+import { showMessage } from "react-native-flash-message";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import Modal from "react-native-modal";
+import { apiBaseUrl } from "../../constants";
 import { useTheme } from "../../hooks/useTheme";
+import { Center } from "../../ui/Center";
+import { MyButton } from "../../ui/MyButton";
+import { MyText } from "../../ui/MyText";
+import { ScreenWrapper } from "../../ui/ScreenWrapper";
+import { AuthStackNav } from "./AuthNav";
 
 export const LoginScreen: React.FC<AuthStackNav<"login">> = ({
   navigation,
@@ -22,8 +20,22 @@ export const LoginScreen: React.FC<AuthStackNav<"login">> = ({
   const [open, setOpen] = useState(Platform.OS === "ios");
   const [underAge, setUnderAge] = useState(false);
   const [appleSignIn, setAppleSignIn] = useState(false);
-  const [mutate] = useMutation(defaultMutationFn);
   const { editorBackground } = useTheme();
+  useEffect(() => {
+    const handleUrl = ({ url }: any) => {
+      const parts = url.split("/");
+      if (parts[parts.length - 3] === "tokens2") {
+        navigation.navigate("tokens", {
+          accessToken: parts[parts.length - 2],
+          refreshToken: parts[parts.length - 1],
+        });
+      }
+    };
+    Linking.addEventListener("url", handleUrl);
+    return () => {
+      Linking.removeEventListener("url", handleUrl);
+    };
+  }, [navigation]);
   return (
     <ScreenWrapper>
       <Modal
@@ -157,7 +169,22 @@ export const LoginScreen: React.FC<AuthStackNav<"login">> = ({
                 login with email
               </MyButton>
             </>
-          ) : null}
+          ) : (
+            <MyButton
+              onPress={async () => {
+                const redirectUrl = await Linking.getInitialURL();
+                if (redirectUrl) {
+                  await WebBrowser.openAuthSessionAsync(
+                    `${apiBaseUrl}/auth/github/rn2`,
+                    redirectUrl
+                  );
+                }
+              }}
+              secondary
+            >
+              (if the one above fails click this)
+            </MyButton>
+          )}
         </View>
       </Center>
     </ScreenWrapper>

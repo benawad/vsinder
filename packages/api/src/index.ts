@@ -89,6 +89,7 @@ const main = async () => {
     }
   };
 
+  const photoUrlTRegex = /(.+&t=)(\d+)/;
   passport.use(
     new GitHubStrategy(
       {
@@ -110,6 +111,21 @@ const main = async () => {
             profileUrl: profile.profileUrl,
             username: profile.username,
           };
+          if (data.photoUrl && data.photoUrl.includes("?")) {
+            let m;
+            if (
+              user?.photoUrl &&
+              user.photoUrl.includes(data.photoUrl) &&
+              (m = photoUrlTRegex.exec(user.photoUrl)) !== null
+            ) {
+              const t = parseInt(m[2]);
+              if (!Number.isNaN(t)) {
+                data.photoUrl = `${m[1]}${t + 1}`;
+              }
+            } else {
+              data.photoUrl += "&t=0";
+            }
+          }
           if (user) {
             await User.update(user.id, data);
           } else {
@@ -233,6 +249,14 @@ const main = async () => {
     res.send(createTokens(user));
   });
 
+  router.get("/auth/github/rn2", (req, res, next) => {
+    const state = Buffer.from(JSON.stringify({ rn2: true })).toString("base64");
+    passport.authenticate("github", {
+      session: false,
+      state,
+    })(req, res, next);
+  });
+
   router.get("/auth/github/rn", (req, res, next) => {
     const state = Buffer.from(JSON.stringify({ rn: true })).toString("base64");
     passport.authenticate("github", {
@@ -258,15 +282,25 @@ const main = async () => {
         return;
       }
       const { state } = req.query;
-      const { rn } = JSON.parse(Buffer.from(state, "base64").toString());
-      if (rn) {
+      const { rn, rn2 } = JSON.parse(Buffer.from(state, "base64").toString());
+      if (rn2) {
         res.redirect(
           `${
             __prod__
               ? `vsinder://`
               : `exp:${
                   process.env.SERVER_URL.replace("http:", "").split(":")[0]
-                }:19005/--/`
+                }:19000/--/`
+          }tokens2/${req.user.accessToken}/${req.user.refreshToken}`
+        );
+      } else if (rn) {
+        res.redirect(
+          `${
+            __prod__
+              ? `vsinder://`
+              : `exp:${
+                  process.env.SERVER_URL.replace("http:", "").split(":")[0]
+                }:19000/--/`
           }tokens/${req.user.accessToken}/${req.user.refreshToken}`
         );
       } else {
