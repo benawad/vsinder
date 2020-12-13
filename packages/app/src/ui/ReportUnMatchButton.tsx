@@ -1,4 +1,4 @@
-import { TouchableOpacity } from "react-native";
+import { Linking, TouchableOpacity } from "react-native";
 import { useActionSheet } from "@expo/react-native-action-sheet";
 import React, { useState } from "react";
 import { MaterialIcons } from "@expo/vector-icons";
@@ -48,9 +48,14 @@ export const ReportUnMatchButton: React.FC<ReportUnMatchButtonProps> = ({}) => {
             paddingRight: 15,
           }}
           onPress={() => {
-            const options = ["Report", "Unmatch", "Cancel"];
+            const options = [
+              "Report user",
+              "Unmatch",
+              "Report a bug",
+              "Cancel",
+            ];
             const destructiveButtonIndex = 0;
-            const cancelButtonIndex = 2;
+            const cancelButtonIndex = 3;
 
             showActionSheetWithOptions(
               {
@@ -63,6 +68,8 @@ export const ReportUnMatchButton: React.FC<ReportUnMatchButtonProps> = ({}) => {
                   setOpen(true);
                 } else if (buttonIndex === 1) {
                   mutate([`/unmatch`, { userId: params.id }, "POST"]);
+                } else if (buttonIndex === 2) {
+                  Linking.openURL("https://github.com/benawad/vsinder/issues");
                 }
               }
             );
