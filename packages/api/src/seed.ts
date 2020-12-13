@@ -1,0 +1,28 @@
+import { createConn } from "./createConn";
+
+export const seed = async () => {
+  const conn = await createConn();
+  await conn.query(`
+  insert into "user" ("codeImgIds", flair, "githubId", username, "displayName", bio, goal, gender, "genderToShow", birthday, "ageRangeMin", "ageRangeMax", location, "profileUrl", "photoUrl", "githubAccessToken", other, "pushToken", "global")
+VALUES ('{ashfogs1y-1606859865406.png}', 'python', uuid_generate_v4(),uuid_generate_v4(),'Maddie', 'i_would_love_to_see_your_python (code)', 'love', 'female', 'male', now()::date - (floor(random() * 5 + 22) * 365)::int, 0, 100, '', '', 'https://randomuser.me/api/portraits/women/33.jpg', '', NULL, NULL, true);
+insert into "user" ("codeImgIds", flair, "githubId", username, "displayName", bio, goal, gender, "genderToShow", birthday, "ageRangeMin", "ageRangeMax", location, "profileUrl", "photoUrl", "githubAccessToken", other, "pushToken", "global")
+VALUES ('{nv8yvr7od-1606765843414.png}', 'kotlin', uuid_generate_v4(),uuid_generate_v4(),'Jenny', 'Come get lost in my parentheses', 'love', 'female', 'male', now()::date - (floor(random() * 5 + 22) * 365)::int, 0, 100, '', '', 'https://randomuser.me/api/portraits/women/42.jpg', '', NULL, NULL, true);
+insert into "user" ("codeImgIds", flair, "githubId", username, "displayName", bio, goal, gender, "genderToShow", birthday, "ageRangeMin", "ageRangeMax", location, "profileUrl", "photoUrl", "githubAccessToken", other, "pushToken", "global")
+VALUES ('{v56pytkbl-1606765556556.png}', 'cpp', uuid_generate_v4(),uuid_generate_v4(),'Mina', 'I give free primers on primes, if you need pointers :)', 'friendship', 'female', 'everyone', now()::date - (floor(random() * 5 + 22) * 365)::int, 0, 100, '', '', 'https://randomuser.me/api/portraits/women/38.jpg', '', NULL, NULL, true);
+insert into "user" ("codeImgIds", flair, "githubId", username, "displayName", bio, goal, gender, "genderToShow", birthday, "ageRangeMin", "ageRangeMax", location, "profileUrl", "photoUrl", "githubAccessToken", other, "pushToken", "global")
+VALUES ('{n8xx8vxl2-1606765599635.png}', 'angular', uuid_generate_v4(),uuid_generate_v4(),'Tori', 'I can show you a whole new angular', 'friendship', 'male', 'everyone', now()::date - (floor(random() * 5 + 22) * 365)::int, 0, 100, '', '', 'https://randomuser.me/api/portraits/women/37.jpg', '', NULL, NULL, true);
+insert into "user" ("codeImgIds", flair, "githubId", username, "displayName", bio, goal, gender, "genderToShow", birthday, "ageRangeMin", "ageRangeMax", location, "profileUrl", "photoUrl", "githubAccessToken", other, "pushToken", "global")
+VALUES ('{ztpgoqyyl-1606860827564.png}', 'java', uuid_generate_v4(),uuid_generate_v4(),'Alisa', 'I drink and code Java, what more can you ask for?', 'love', 'female', 'male', now()::date - (floor(random() * 5 + 22) * 365)::int, 0, 100, '', '', 'https://randomuser.me/api/portraits/women/34.jpg', '', NULL, NULL, true);
+insert into "user" ("codeImgIds", flair, "githubId", username, "displayName", bio, goal, gender, "genderToShow", birthday, "ageRangeMin", "ageRangeMax", location, "profileUrl", "photoUrl", "githubAccessToken", other, "pushToken", "global")
+VALUES ('{ashfogs1y-1606859865406.png}', 'python', uuid_generate_v4(),uuid_generate_v4(),'Tim', 'i_would_love_to_see_your_python (code)', 'love', 'male', 'female', now()::date - (floor(random() * 5 + 22) * 365)::int, 0, 100, '', '', 'https://randomuser.me/api/portraits/men/33.jpg', '', NULL, NULL, true);
+insert into "user" ("codeImgIds", flair, "githubId", username, "displayName", bio, goal, gender, "genderToShow", birthday, "ageRangeMin", "ageRangeMax", location, "profileUrl", "photoUrl", "githubAccessToken", other, "pushToken", "global")
+VALUES ('{nv8yvr7od-1606765843414.png}', 'kotlin', uuid_generate_v4(),uuid_generate_v4(),'Joe', 'Come get lost in my parentheses', 'love', 'male', 'female', now()::date - (floor(random() * 5 + 22) * 365)::int, 0, 100, '', '', 'https://randomuser.me/api/portraits/men/42.jpg', '', NULL, NULL, true);
+insert into "user" ("codeImgIds", flair, "githubId", username, "displayName", bio, goal, gender, "genderToShow", birthday, "ageRangeMin", "ageRangeMax", location, "profileUrl", "photoUrl", "githubAccessToken", other, "pushToken", "global")
+VALUES ('{v56pytkbl-1606765556556.png}', 'cpp', uuid_generate_v4(),uuid_generate_v4(),'Mike', 'I give free primers on primes, if you need pointers :)', 'friendship', 'male', 'everyone', now()::date - (floor(random() * 5 + 22) * 365)::int, 0, 100, '', '', 'https://randomuser.me/api/portraits/men/38.jpg', '', NULL, NULL, true);
+insert into "user" ("codeImgIds", flair, "githubId", username, "displayName", bio, goal, gender, "genderToShow", birthday, "ageRangeMin", "ageRangeMax", location, "profileUrl", "photoUrl", "githubAccessToken", other, "pushToken", "global")
+VALUES ('{n8xx8vxl2-1606765599635.png}', 'angular', uuid_generate_v4(),uuid_generate_v4(),'Bob', 'I can show you a whole new angular', 'friendship', 'male', 'everyone', now()::date - (floor(random() * 5 + 22) * 365)::int, 0, 100, '', '', 'https://randomuser.me/api/portraits/men/37.jpg', '', NULL, NULL, true);
+insert into "user" ("codeImgIds", flair, "githubId", username, "displayName", bio, goal, gender, "genderToShow", birthday, "ageRangeMin", "ageRangeMax", location, "profileUrl", "photoUrl", "githubAccessToken", other, "pushToken", "global")
+VALUES ('{ztpgoqyyl-1606860827564.png}', 'java', uuid_generate_v4(),uuid_generate_v4(),'Trevor', 'I drink and code Java, what more can you ask for?', 'love', 'male', 'male', now()::date - (floor(random() * 5 + 22) * 365)::int, 0, 100, '', '', 'https://randomuser.me/api/portraits/men/34.jpg', '', NULL, NULL, true);
+  `);
+  console.log("db has been successfully seeded");
+};

@@ -1,23 +1,42 @@
 require("dotenv-safe").config();
+import { createMessageAdapter } from "@slack/interactive-messages";
 import cors from "cors";
 import express from "express";
 import Router from "express-promise-router";
 import helmet from "helmet";
+import http from "http";
 import createError from "http-errors";
+import Redis from "ioredis";
+import isUuid from "is-uuid";
+import { verify } from "jsonwebtoken";
+import fetch from "node-fetch";
 import passport from "passport";
 import { Strategy as GitHubStrategy } from "passport-github";
-import { join } from "path";
+import {
+  IRateLimiterStoreOptions,
+  RateLimiterRedis,
+} from "rate-limiter-flexible";
 import "reflect-metadata";
-import fetch from "node-fetch";
 import { assert } from "superstruct";
-import { createConnection, getConnection } from "typeorm";
+import { getConnection } from "typeorm";
+import url from "url";
+import WebSocket, { Server } from "ws";
 import { createTokens } from "./auth/createTokens";
 import { isAuth } from "./auth/isAuth";
 import { activeSwipesMax, __prod__ } from "./constants";
+import { createConn } from "./createConn";
 import { Match } from "./entities/Match";
 import { Message } from "./entities/Message";
+import { Report } from "./entities/Report";
 import { User } from "./entities/User";
 import { View } from "./entities/View";
+import {
+  queuePushNotifToSend,
+  startPushNotificationRunner,
+} from "./pushNotifications";
+import { getUser } from "./queries/getUser";
+import { rateLimitMiddleware } from "./rateLimitMiddleware";
+import { resetNumSwipesDaily } from "./resetNumSwipesDaily";
 import { getAge, getUserIdOrder } from "./utils";
 import {
   GetMessageStruct,
@@ -30,38 +49,11 @@ import {
   UserCodeImgs,
   ViewStruct,
 } from "./validation";
-import http from "http";
-import WebSocket, { Server } from "ws";
-import url from "url";
-import { verify } from "jsonwebtoken";
-import { getUser } from "./queries/getUser";
-import { Report } from "./entities/Report";
-import { createMessageAdapter } from "@slack/interactive-messages";
-import {
-  queuePushNotifToSend,
-  startPushNotificationRunner,
-} from "./pushNotifications";
-import Redis from "ioredis";
-import {
-  RateLimiterRedis,
-  IRateLimiterStoreOptions,
-} from "rate-limiter-flexible";
-import { rateLimitMiddleware } from "./rateLimitMiddleware";
-import { resetNumSwipesDaily } from "./resetNumSwipesDaily";
-import isUuid from "is-uuid";
 
 const SECONDS_IN_A_HALF_A_DAY = 86400 / 2;
 
 const main = async () => {
-  const conn = await createConnection({
-    type: "postgres",
-    database: __prod__ ? undefined : "vsinder",
-    url: __prod__ ? process.env.DATABASE_URL : undefined,
-    entities: [join(__dirname, "./entities/*")],
-    migrations: [join(__dirname, "./migrations/*")],
-    // synchronize: !__prod__,
-    logging: !__prod__,
-  });
+  const conn = await createConn();
   console.log("connected, running migrations now");
   await conn.runMigrations();
   console.log("migrations ran");
