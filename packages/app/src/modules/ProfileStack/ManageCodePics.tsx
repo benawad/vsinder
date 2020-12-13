@@ -15,6 +15,7 @@ import { useCodeImgs } from "./useCodeImgs";
 
 import { StyleSheet } from "react-native";
 import { useTheme } from "../../hooks/useTheme";
+import { showMessage } from "react-native-flash-message";
 const styles = StyleSheet.create({
   card: {
     marginBottom: 10,
@@ -126,6 +127,14 @@ export const ManageCodePics: React.FC<ProfileStackNav<"manageCodePics">> = ({
         disabled={loadingSomeImgs}
         isLoading={isLoading}
         onPress={async () => {
+          if (!codeImgs.length) {
+            showMessage({
+              message: "You need to add at least 1 code image",
+              duration: 10000,
+              type: "danger",
+            });
+            return;
+          }
           try {
             const ids = codeImgs.map((x) => x.value);
             await mutate(["/user/imgs", { codeImgIds: ids }, "PUT"]);

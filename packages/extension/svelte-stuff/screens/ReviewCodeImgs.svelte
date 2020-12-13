@@ -125,6 +125,13 @@
   <LoadingButton
     disabled={disabled || atleastOneImgIsLoading}
     on:click={async () => {
+      if (!codeImgIds.length) {
+        tsvscode.postMessage({
+          type: 'onError',
+          value: 'You need to add at least 1 code image',
+        });
+        return;
+      }
       disabled = true;
       try {
         let ids = codeImgIds.map((x) => x.value);
