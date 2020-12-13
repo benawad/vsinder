@@ -22,5 +22,6 @@ export const flairMap = {
   svelte: "svelte.png",
   kotlin: "kotlin.png",
   ruby: "ruby.png",
+  tailwindcss: "tailwindcss.png",
   ionic: "ionic.png"
 };
