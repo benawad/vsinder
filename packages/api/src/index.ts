@@ -736,6 +736,8 @@ const main = async () => {
                           " | " +
                           u.gender +
                           " | " +
+                          u.goal +
+                          " | " +
                           u.bio +
                           " | " +
                           u.photoUrl,
