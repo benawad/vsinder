@@ -25,6 +25,7 @@ import { MyTextInput } from "../../ui/MyTextInput";
 import { ScreenWrapper } from "../../ui/ScreenWrapper";
 import { getAge, userToInitialFormData } from "../../utils";
 import { ProfileStackNav } from "./ProfileNav";
+import { useCodeImgs } from "./useCodeImgs";
 
 const schema = yup.object().shape({
   displayName: yup.string().required().max(50),
@@ -80,7 +81,11 @@ export const EditProfile: React.FC<ProfileStackNav<"editProfile">> = ({
             if (data!.user!.codeImgIds.length) {
               navigation.goBack();
             } else {
-              navigation.navigate(`codeSnippeter`, { replace: true });
+              if (useCodeImgs.getState().codeImgs.length) {
+                navigation.navigate(`manageCodePics`);
+              } else {
+                navigation.navigate(`codeSnippeter`, { replace: true });
+              }
             }
           } catch {}
         }}
