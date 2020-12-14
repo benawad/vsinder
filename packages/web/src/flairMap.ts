@@ -24,5 +24,6 @@ export const flairMap = {
   ruby: "ruby.png",
   tailwindcss: "tailwindcss.png",
   ionic: "ionic.png",
-  bash: "bash.png"
+  bash: "bash.png",
+  php: "php.png"
 };
