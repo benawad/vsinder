@@ -124,9 +124,14 @@
         on:click={() => {
           tsvscode.postMessage({ type: 'start-swiping' });
         }}>start swiping</button>
-      <div style="margin-top: 40px;">
+      <div class="mb" style="margin-top: 40px;">
         (To change your profile picture, you need to change it on GitHub then
         logout and login again)
+      </div>
+      <div>
+        <a class="secondary" href="https://github.com/benawad/vsinder/issues">
+          report a bug
+        </a>
       </div>
     {/if}
     <div class="logout-container">

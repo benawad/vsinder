@@ -49,6 +49,15 @@ function ErrorFallback({ resetErrorBoundary, error }: FallbackProps) {
         >
           copy stacktrace to clipboard
         </MyButton>
+        <MyButton
+          style={{ marginBottom: 20 }}
+          secondary
+          onPress={() =>
+            Linking.openURL("https://github.com/benawad/vsinder/issues")
+          }
+        >
+          report a bug
+        </MyButton>
         <MyButton onPress={resetErrorBoundary}>reload app</MyButton>
       </ScrollView>
     </ScreenWrapper>

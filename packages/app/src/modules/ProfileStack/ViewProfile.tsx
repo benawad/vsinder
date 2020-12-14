@@ -1,5 +1,5 @@
 import React from "react";
-import { TouchableOpacity, View } from "react-native";
+import { Linking, TouchableOpacity, View } from "react-native";
 import { useQuery } from "react-query";
 import { MeResponse } from "../../types";
 import { Avatar } from "../../ui/Avatar";
@@ -91,6 +91,17 @@ export const ViewProfile: React.FC<ProfileStackNav<"viewProfile">> = ({
             secondary
           >
             edit code pics
+          </MyButton>
+        </View>
+        <View style={{ width: "100%", marginTop: 20 }}>
+          <MyButton
+            style={{ width: "100%" }}
+            onPress={() => {
+              Linking.openURL("https://github.com/benawad/vsinder/issues");
+            }}
+            secondary
+          >
+            report a bug
           </MyButton>
         </View>
         <MyText style={{ marginTop: 40 }}>
