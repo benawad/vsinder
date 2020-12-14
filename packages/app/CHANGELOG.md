@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.16](https://github.com/benawad/vsinder/compare/v1.2.15...v1.2.16) (2020-12-14)
+
 ### [1.2.15](https://github.com/benawad/vsinder/compare/v1.2.14...v1.2.15) (2020-12-13)
 
 ### [1.2.14](https://github.com/benawad/vsinder/compare/v1.12.0...v1.2.14) (2020-12-12)
