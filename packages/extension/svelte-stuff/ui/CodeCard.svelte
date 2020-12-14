@@ -39,6 +39,16 @@
     bottom: 0;
     width: 100%;
   }
+  .more-photos {
+    background-color: #0d0d0d;
+    border-top-left-radius: 9px;
+    border-bottom-left-radius: 9px;
+    padding: 6px;
+    position: absolute;
+    z-index: 3;
+    right: 0;
+    top: 20px;
+  }
   .inner-wrapper {
     display: flex;
     align-items: center;
@@ -140,6 +150,9 @@
   <div on:click={onLeftImage} class={`left ${profile.codeImgIds.length > 1 && 'has-more'}`} />
   <div on:click={onRightImage} class={`right ${profile.codeImgIds.length > 1 && 'has-more'}`} />
   <CodeImg id={profile.codeImgIds[profile.imgShowingIdx || 0]} />
+  {#if profile.codeImgIds.length > 1}
+    <div class="inner-wrapper more-photos">{profile.codeImgIds.length - 1} more {(profile.codeImgIds.length - 1 > 1) ? "photos": "photo"}</div>
+  {/if}
   <div
     on:click={() => {
       expanded = !expanded;
