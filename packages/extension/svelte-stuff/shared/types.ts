@@ -17,6 +17,7 @@ export interface User {
   photoUrl: string;
   codeImgIds: string[];
   numLikes: number;
+  numSwipes: number;
   unreadMatchUserIds: Array<{ userId1: string; userId2: string }>;
 }
 

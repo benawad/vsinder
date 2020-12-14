@@ -3,6 +3,7 @@ import { User } from "../entities/User";
 
 const meFields: Array<keyof User> = [
   "numLikes",
+  "numSwipes",
   "global",
   "flair",
   "id",
