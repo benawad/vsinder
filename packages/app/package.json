@@ -1,5 +1,5 @@
 {
-  "version": "1.2.16",
+  "version": "1.2.17",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
