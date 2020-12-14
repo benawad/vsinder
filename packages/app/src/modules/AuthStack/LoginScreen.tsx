@@ -88,6 +88,13 @@ export const LoginScreen: React.FC<AuthStackNav<"login">> = ({
           <MyButton
             style={{ marginBottom: 30 }}
             onPress={async () => {
+              if (Platform.OS === "android") {
+                await WebBrowser.openBrowserAsync(
+                  `${apiBaseUrl}/auth/github/rn2`,
+                  { showInRecents: true }
+                );
+                return;
+              }
               try {
                 // @todo we can probably hard code this
                 const redirectUrl = await Linking.getInitialURL();
@@ -169,22 +176,7 @@ export const LoginScreen: React.FC<AuthStackNav<"login">> = ({
                 login with email
               </MyButton>
             </>
-          ) : (
-            <MyButton
-              onPress={async () => {
-                const redirectUrl = await Linking.getInitialURL();
-                if (redirectUrl) {
-                  await WebBrowser.openAuthSessionAsync(
-                    `${apiBaseUrl}/auth/github/rn2`,
-                    redirectUrl
-                  );
-                }
-              }}
-              secondary
-            >
-              (if the one above fails click this)
-            </MyButton>
-          )}
+          ) : null}
         </View>
       </Center>
     </ScreenWrapper>
