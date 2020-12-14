@@ -1,11 +1,9 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-
   import { flairOptions } from "../shared/constants";
-
   import { mutation } from "../shared/mutation";
   import type { ProfileFormData, User } from "../shared/types";
   import { getAge } from "../shared/utils";
+  import CheckboxGroup from "../ui/CheckboxGroup.svelte";
   import Flair from "../ui/Flair.svelte";
   import InputField from "../ui/InputField.svelte";
   import LoadingButton from "../ui/LoadingButton.svelte";
@@ -19,6 +17,15 @@
   let form: HTMLFormElement;
   const currentYear = new Date().getFullYear();
   let disabled = false;
+
+  $: {
+    if (!data.gendersToShow) {
+      data.gendersToShow =
+        data.genderToShow === "everyone"
+          ? ["male", "female", "non-binary"]
+          : [data.genderToShow];
+    }
+  }
 
   $: age =
     data.year && data.month && data.day
@@ -143,12 +150,14 @@
         bind:value={data.gender}
         options={[{ label: 'male', value: 'male' }, { label: 'female', value: 'female' }, { label: 'non-binary', value: 'non-binary' }]} />
     </div>
-    <div>
-      <div class="label">Show me code from:</div>
-      <RadioGroup
-        bind:value={data.genderToShow}
-        options={[{ label: 'males', value: 'male' }, { label: 'females', value: 'female' }, { label: 'everyone', value: 'everyone' }]} />
-    </div>
+    {#if data.gendersToShow}
+      <div>
+        <div class="label">Show me code from:</div>
+        <CheckboxGroup
+          bind:value={data.gendersToShow}
+          options={[{ label: 'males', value: 'male' }, { label: 'females', value: 'female' }, { label: 'non-binary', value: 'non-binary' }]} />
+      </div>
+    {/if}
     <div>
       <div class="label">Age Range:</div>
       <div class="row">
@@ -177,7 +186,6 @@
     </div>
     <div>
       <LocationAutocomplete
-        required
         name="location"
         label="City"
         bind:value={data.location} />
@@ -198,7 +206,7 @@
         disabled = true;
         try {
           const { year, month, day, ...values } = data;
-          const { user } = await mutation('/user', { ...values, birthday: `${year}-${ ("0" + (parseInt(month) + 1)).slice(-2) }-${day.length === 1 ? '0' + day : day}` }, { method: 'PUT' });
+          const { user } = await mutation('/user', { ...values, birthday: `${year}-${('0' + (parseInt(month) + 1)).slice(-2)}-${day.length === 1 ? '0' + day : day}` }, { method: 'PUT' });
           onNext(user);
         } catch {}
         disabled = false;

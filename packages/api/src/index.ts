@@ -368,16 +368,22 @@ const main = async () => {
       if (req.body.goal === "friendship") {
         req.body.ageRangeMin = 18;
         req.body.ageRangeMax = 33;
-        req.body.location = "online";
       }
       if (!req.body.location) {
-        req.body.location = "online";
+        req.body.location = "";
       }
       try {
         assert(req.body, UpdateUser);
       } catch (err) {
         next(createError(400, err.message));
         return;
+      }
+
+      if (!req.body.gendersToShow) {
+        req.body.gendersToShow =
+          req.body.genderToShow === "everyone"
+            ? ["male", "female", "non-binary"]
+            : [req.body.genderToShow];
       }
 
       await User.update(req.userId, req.body);
@@ -449,7 +455,7 @@ const main = async () => {
       const paramNum = user.global ? 6 : 4;
       const loveWhere = `
         and goal = 'love'
-        and ("genderToShow" = 'everyone' or "genderToShow" = $${paramNum})
+        and $${paramNum} = any("gendersToShow")
         and $${paramNum + 1} <= date_part('year', age(birthday))
         and $${paramNum + 2} >= date_part('year', age(birthday))
         and "ageRangeMin" <= $${paramNum + 3}
@@ -458,8 +464,12 @@ const main = async () => {
         user.global ? `or global = true` : ""
       })
         ${
-          user.genderToShow !== "everyone"
-            ? `and gender = $${paramNum + 6}`
+          user.gendersToShow.length
+            ? "and (" +
+              user.gendersToShow
+                .map((_, i) => `gender = $${paramNum + 6 + i}`)
+                .join(" or ") +
+              ")"
             : ""
         }
     `;
@@ -474,12 +484,8 @@ const main = async () => {
         myAge,
         myAge,
         user.location,
+        ...user.gendersToShow,
       ];
-      if (user.genderToShow !== "everyone") {
-        loveParams.push(
-          user.genderToShow // their gender matches my gender I want to see
-        );
-      }
       const friendWhere = `and goal = 'friendship' and date_part('year', age(birthday)) ${
         myAge >= 18 ? ">=" : "<"
       } 18`;

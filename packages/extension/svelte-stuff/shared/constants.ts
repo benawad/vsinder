@@ -453,6 +453,7 @@ export const initialProfileData: ProfileFormData = {
   bio: "",
   gender: "male",
   genderToShow: "male",
+  gendersToShow: ["male", "female", "non-binary"],
   goal: "friendship",
   ageRangeMax: 33,
   ageRangeMin: 18,

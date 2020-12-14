@@ -25,6 +25,7 @@ export const UpdateUser = object({
   bio: length(string(), 0, 151),
   gender: length(string(), 0, 51),
   genderToShow: length(string(), 0, 51),
+  gendersToShow: optional(length(array(length(string(), 0, 50)), -1, 4)),
   goal: length(string(), 0, 51),
   location: length(string(), -1, 201),
   global: boolean(),

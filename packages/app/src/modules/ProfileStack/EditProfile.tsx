@@ -5,6 +5,7 @@ import { Platform, ScrollView, View } from "react-native";
 import { useMutation, useQuery, useQueryCache } from "react-query";
 const yup = require("yup");
 import { initialProfileData } from "../../constants";
+import { CheckboxGroupField } from "../../form-fields/CheckboxGroupField";
 import { DatePickerField } from "../../form-fields/DatePickerField";
 import { FlairSelectField } from "../../form-fields/FlairSelectField";
 import { RadioGroupField } from "../../form-fields/RadioGroupField";
@@ -165,13 +166,13 @@ export const EditProfile: React.FC<ProfileStackNav<"editProfile">> = ({
                     />
                   </FormSpacer>
                   <FormSpacer>
-                    <RadioGroupField
-                      name="genderToShow"
+                    <CheckboxGroupField
+                      name="gendersToShow"
                       label="Show me code from:"
                       options={[
                         { label: "males", value: "male" },
                         { label: "females", value: "female" },
-                        { label: "everyone", value: "everyone" },
+                        { label: "non-binary", value: "non-binary" },
                       ]}
                     />
                   </FormSpacer>

@@ -6,6 +6,7 @@ export interface User {
   bio: string;
   goal: string;
   genderToShow: string;
+  gendersToShow: string[];
   gender: string | null;
   displayName: string;
   ageRangeMin: number;
@@ -91,6 +92,7 @@ export type ProfileFormData = {
   bio: string;
   gender: string;
   genderToShow: string;
+  gendersToShow: string[];
   goal: string;
   ageRangeMin: string;
   ageRangeMax: string;

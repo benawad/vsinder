@@ -41,6 +41,12 @@ export class User extends BaseEntity {
   @Column("text", { nullable: true })
   genderToShow: string | null;
 
+  @Column("text", {
+    default: "array['male', 'female', 'non-binary']",
+    array: true,
+  })
+  gendersToShow: string[];
+
   @Column("date", { nullable: true })
   birthday: Date | null;
 

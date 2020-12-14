@@ -9,6 +9,7 @@ export function userToInitialFormData(u: User) {
     displayName: u.displayName,
     gender: u.gender || initialProfileData.gender,
     genderToShow: u.genderToShow || initialProfileData.genderToShow,
+    gendersToShow: u.gendersToShow,
     goal: u.goal || initialProfileData.goal,
     ageRangeMax: "" + (u.ageRangeMax || initialProfileData.ageRangeMax),
     ageRangeMin: "" + (u.ageRangeMin || initialProfileData.ageRangeMin),

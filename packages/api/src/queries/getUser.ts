@@ -12,6 +12,7 @@ const meFields: Array<keyof User> = [
   "codeImgIds",
   "gender",
   "genderToShow",
+  "gendersToShow",
   "goal",
   "ageRangeMax",
   "ageRangeMin",
