@@ -480,7 +480,7 @@ const main = async () => {
           user.genderToShow // their gender matches my gender I want to see
         );
       }
-      const friendWhere = `and date_part('year', age(birthday)) ${
+      const friendWhere = `and goal = 'friendship' and date_part('year', age(birthday)) ${
         myAge >= 18 ? ">=" : "<"
       } 18`;
       const friendParams = [req.userId, req.userId, req.userId];
