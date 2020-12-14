@@ -39,7 +39,7 @@
     bottom: 0;
     width: 100%;
   }
-  .more-photos {
+  .more-images {
     background-color: #0d0d0d;
     border-top-left-radius: 9px;
     border-bottom-left-radius: 9px;
@@ -151,7 +151,7 @@
   <div on:click={onRightImage} class={`right ${profile.codeImgIds.length > 1 && 'has-more'}`} />
   <CodeImg id={profile.codeImgIds[profile.imgShowingIdx || 0]} />
   {#if profile.codeImgIds.length > 1}
-    <div class="inner-wrapper more-photos">{profile.codeImgIds.length - 1} more {(profile.codeImgIds.length - 1 > 1) ? "photos": "photo"}</div>
+    <div class="inner-wrapper more-images">{profile.codeImgIds.length - 1} more {(profile.codeImgIds.length - 1 > 1) ? "images": "image"}</div>
   {/if}
   <div
     on:click={() => {
