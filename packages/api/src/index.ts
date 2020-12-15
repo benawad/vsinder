@@ -451,6 +451,13 @@ const main = async () => {
         return;
       }
 
+      if (!user.gendersToShow.length) {
+        res.json({
+          profiles: [],
+        });
+        return;
+      }
+
       const myAge = getAge(new Date(user.birthday));
       const paramNum = user.global ? 6 : 4;
       const loveWhere = `
