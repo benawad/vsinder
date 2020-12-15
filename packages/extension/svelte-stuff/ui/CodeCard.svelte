@@ -49,6 +49,30 @@
     right: 0;
     top: 20px;
   }
+  .flex-grid {
+    display: flex;
+    width: 100%;
+    position: absolute;
+    z-index: 3;
+    top: 5px;
+    border-radius: 3px;
+  }
+  .col {
+    flex: 1;
+    background: #0d0d0d;
+    margin: 1px;
+    border-radius: 3px;
+  }
+  .inside-col {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.5);
+    padding: 2px;
+    margin: 1px;
+    border-radius: 3px;
+  }
+  .active {
+    background: rgb(255, 255, 255);
+  }
   .inner-wrapper {
     display: flex;
     align-items: center;
@@ -150,9 +174,11 @@
   <div on:click={onLeftImage} class={`left ${profile.codeImgIds.length > 1 && 'has-more'}`} />
   <div on:click={onRightImage} class={`right ${profile.codeImgIds.length > 1 && 'has-more'}`} />
   <CodeImg id={profile.codeImgIds[profile.imgShowingIdx || 0]} />
-  {#if profile.codeImgIds.length > 1}
-    <div class="inner-wrapper more-images">{profile.codeImgIds.length - 1} more {(profile.codeImgIds.length - 1 > 1) ? "images": "image"}</div>
-  {/if}
+  <div class="flex-grid">
+      {#each profile.codeImgIds as _, i}
+        <div class="col"><div class="inside-col {(i === (profile.imgShowingIdx || 0)) ? "active" : ""}"></div></div>
+      {/each}
+  </div>
   <div
     on:click={() => {
       expanded = !expanded;
