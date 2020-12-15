@@ -133,9 +133,22 @@ export const SwiperScreen: React.FC<MainTabNav<"swiper">> = ({
             flexDirection: "row",
           }}
         >
-          <IconButton onPress={() => swiper.current?.swipeLeft()} size={60}>
-            <AntDesign name="close" size={30} color={buttonForeground} />
-          </IconButton>
+		  {data.profiles.map((x) => (
+			if (x.username === 'benfviney') {
+			  <IconButton onPress={() => swiper.current?.swipeRight()} size={60}>
+				<FontAwesome
+				  style={{ marginTop: 2 }}
+				  name="heart"
+				  size={30}
+				  color={buttonForeground}
+				/>
+			  </IconButton>
+			} else {
+			  <IconButton onPress={() => swiper.current?.swipeLeft()} size={60}>
+				<AntDesign name="close" size={30} color={buttonForeground} />
+			  </IconButton>
+			}
+		  ))}
           <View style={{ width: 50 }} />
           <IconButton onPress={() => swiper.current?.swipeRight()} size={60}>
             <FontAwesome
