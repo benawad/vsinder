@@ -39,16 +39,6 @@
     bottom: 0;
     width: 100%;
   }
-  .more-images {
-    background-color: #0d0d0d;
-    border-top-left-radius: 9px;
-    border-bottom-left-radius: 9px;
-    padding: 6px;
-    position: absolute;
-    z-index: 3;
-    right: 0;
-    top: 20px;
-  }
   .flex-grid {
     display: flex;
     width: 100%;
