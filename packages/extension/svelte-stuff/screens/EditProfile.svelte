@@ -7,7 +7,6 @@
   import Flair from "../ui/Flair.svelte";
   import InputField from "../ui/InputField.svelte";
   import LoadingButton from "../ui/LoadingButton.svelte";
-  import LocationAutocomplete from "../ui/LocationAutocomplete.svelte";
   import RadioGroup from "../ui/RadioGroup.svelte";
   import SelectField from "../ui/SelectField.svelte";
 
@@ -182,18 +181,6 @@
             name="maxAgeRange"
             bind:value={data.ageRangeMax} />
         </div>
-      </div>
-    </div>
-    <div>
-      <LocationAutocomplete
-        name="location"
-        label="City"
-        bind:value={data.location} />
-      <div style="margin-top: 6px;">
-        <label for="global" style="word-wrap:break-word">
-          <input id="global" type="checkbox" bind:checked={data.global} />see
-          people from around the world after you've run out of profiles nearby
-        </label>
       </div>
     </div>
   {/if}

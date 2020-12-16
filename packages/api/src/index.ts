@@ -459,7 +459,7 @@ const main = async () => {
       }
 
       const myAge = getAge(new Date(user.birthday));
-      const paramNum = user.global ? 6 : 4;
+      const paramNum = 4;
       const loveWhere = `
         and goal = 'love'
         and $${paramNum} = any("gendersToShow")
@@ -467,14 +467,11 @@ const main = async () => {
         and $${paramNum + 2} >= date_part('year', age(birthday))
         and "ageRangeMin" <= $${paramNum + 3}
         and "ageRangeMax" >= $${paramNum + 4}
-        and (location = $${paramNum + 5} ${
-        user.global ? `or global = true` : ""
-      })
         ${
           user.gendersToShow.length
             ? "and (" +
               user.gendersToShow
-                .map((_, i) => `gender = $${paramNum + 6 + i}`)
+                .map((_, i) => `gender = $${paramNum + 5 + i}`)
                 .join(" or ") +
               ")"
             : ""
@@ -484,13 +481,11 @@ const main = async () => {
         req.userId,
         req.userId,
         req.userId,
-        ...(user.global ? [user.location, user.location] : []),
         user.gender, // my gender matches their gender they want to see
         user.ageRangeMin,
         user.ageRangeMax,
         myAge,
         myAge,
-        user.location,
         ...user.gendersToShow,
       ];
       const friendWhere = `and goal = 'friendship' and date_part('year', age(birthday)) ${
@@ -512,16 +507,6 @@ const main = async () => {
         and "shadowBanned" != true
         order by
           (case
-            ${
-              user.goal === "love" && user.global
-                ? `
-            when (u.location = $4 and v2 is not null)
-            then random() - 1.2
-            when (u.location = $5)
-            then random() - 1
-            `
-                : ""
-            }
             when (v2 is not null)
             then random() - .2
             else random()

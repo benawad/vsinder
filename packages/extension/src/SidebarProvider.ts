@@ -4,7 +4,6 @@ import { accessTokenKey, apiBaseUrl, refreshTokenKey } from "./constants";
 import { FlairProvider } from "./FlairProvider";
 import { getNonce } from "./getNonce";
 import { mutation, mutationNoErr } from "./mutation";
-import { placesApiKey } from "./places-api-key";
 import { SnippetStatus } from "./SnippetStatus";
 import { SwiperPanel } from "./SwiperPanel";
 import { Util } from "./Util";
@@ -162,8 +161,7 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
             : apiBaseUrl.replace("http", "ws")
         } ${apiBaseUrl} https://x9lecdo5aj.execute-api.us-east-1.amazonaws.com; img-src https: data:; style-src 'unsafe-inline' ${
       webview.cspSource
-    }; script-src https://maps.googleapis.com 'nonce-${nonce}';">
-        <script src="https://maps.googleapis.com/maps/api/js?key=${placesApiKey}&libraries=places"></script>
+    }; script-src 'nonce-${nonce}';">
 				<meta name="viewport" content="width=device-width, initial-scale=1.0">
 				<link href="${styleResetUri}" rel="stylesheet">
 				<link href="${styleVSCodeUri}" rel="stylesheet">

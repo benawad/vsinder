@@ -21,7 +21,6 @@ import { FullscreenLoading } from "../../ui/FullscreenLoading";
 import { KeyboardAwareScrollView } from "../../ui/KeyboardAwareScrollView";
 import { Label } from "../../ui/Label";
 import { LoadingButton } from "../../ui/LoadingButton";
-import { LocationAutocomplete } from "../../ui/LocationAutocomplete";
 import { MyTextInput } from "../../ui/MyTextInput";
 import { ScreenWrapper } from "../../ui/ScreenWrapper";
 import { getAge, userToInitialFormData } from "../../utils";
@@ -203,27 +202,6 @@ export const EditProfile: React.FC<ProfileStackNav<"editProfile">> = ({
                         {errors.ageRangeMin}
                       </ErrorText>
                     ) : null}
-                  </FormSpacer>
-                  <FormSpacer>
-                    <View style={{ marginBottom: 4 }}>
-                      <Label>City: </Label>
-                    </View>
-                    <LocationAutocomplete
-                      defaultValue={values.location}
-                      onFocus={() => {
-                        scrollView.current?.scrollToEnd();
-                      }}
-                      onLocation={(x) => {
-                        setFieldValue("location", x);
-                      }}
-                    />
-                    <View style={{ marginTop: 6 }}>
-                      <CheckboxWithLabel
-                        checked={values.global}
-                        onPress={() => setFieldValue("global", !values.global)}
-                        label="see people from around the world after you've run out of profiles nearby"
-                      />
-                    </View>
                   </FormSpacer>
                 </>
               ) : null}
