@@ -2,12 +2,14 @@
   import type { Message } from "../shared/types";
   import { dtToMsgStr } from "../shared/utils";
   import Avatar from "../ui/Avatar.svelte";
+  import Menu from "../ui/Menu.svelte";
 
   export let userInfo: { id: string; displayName: string; flair: string };
   export let myId: string;
   export let photoUrl: string;
   export let mg: Message[];
   export let i: number;
+  export let onDelete: (message: Message, recipientId: string) => void;
 
   $: lastMessage = mg[mg.length - 1];
   $: isSender = lastMessage.senderId === myId;
@@ -27,6 +29,7 @@
   .bubble {
     display: flex;
     margin-bottom: 4px;
+    cursor: pointer;
   }
 
   .sender.bubble > div {
@@ -95,6 +98,21 @@
     width: 50px;
     border-radius: 50%;
   }
+  .list {
+    padding: 0.5rem 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .item {
+    padding: 0.5rem;
+    cursor: pointer;
+    font-size: 14px;
+    letter-spacing: 0.01rem;
+  }
+  .item:hover {
+    background-color:#3991f5;
+    color: #ffffff;
+  }
 </style>
 
 <div class="message-group" class:mb={i === 0}>
@@ -117,10 +135,17 @@
     {/if}
     <div style="margin-left: 4px; flex: 1;" class="message-group">
       {#each mg as m, i}
-        <div
-          class={`bubble ${isSender ? 'sender' : 'recipient'} ${i === mg.length - 1 ? 'start' : ''}`}>
-          <div>{m.text}</div>
-        </div>
+        <Menu disabled={m.senderId !== myId} right={true} absolute>
+    		  <div slot="activator"> 
+            <div
+              class={`bubble ${isSender ? 'sender' : 'recipient'} ${i === mg.length - 1 ? 'start' : ''}`}>
+              <div>{m.text}</div>
+            </div>
+				  </div>
+    		  <div class="list">
+            <span class="item" on:click={()=>  onDelete(m, userInfo.id) }>Delete</span>
+          </div>
+  		  </Menu>
       {/each}
     </div>
   </div>

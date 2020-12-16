@@ -17,6 +17,7 @@
   export let myId: string;
   export let onMessage: (m: Message) => void;
   export let onUnmatch: (x: string) => void;
+  export let onMessageDeleted: (messageId: string) => void;
   let loadingMessageSent = false;
   let loading = true;
   let isLoadingMore = false;
@@ -81,6 +82,20 @@
       }),
     ];
     hasMore = payload.hasMore;
+  }
+
+  async function deleteMessage(message: Message, recipientId: string) {
+    const { messageId } = await mutation(
+      '/delete-message',
+      { recipientId: user.id, matchId: user.matchId, messageId: message.id },
+      { method: "DELETE" }
+    );
+
+    messages = messages.filter(message => message.id !== messageId);
+
+    onMessageDeleted(messageId);
+
+    console.log(messageId);
   }
 
   onMount(async () => {
@@ -154,7 +169,9 @@
           {i}
           {mg}
           {myId}
-          photoUrl={user.photoUrl} />
+          photoUrl={user.photoUrl} 
+          onDelete={deleteMessage} 
+        />
       {/each}
       {#if hasMore}
         <div

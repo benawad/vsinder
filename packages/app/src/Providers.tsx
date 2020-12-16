@@ -48,7 +48,7 @@ export const setTokens = (_accessToken: string, _refreshToken: string) => {
 export const defaultMutationFn = async ([path, body, method = "POST"]: [
   string,
   any,
-  "POST" | "PUT"
+  "POST" | "PUT" | "DELETE"
 ]) => {
   if (!accessToken || !refreshToken) {
     await loadTokens();

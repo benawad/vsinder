@@ -65,6 +65,7 @@ export const MatchesScreen: React.FC<MatchesStackNav<"matchy">> = ({
                   ...m,
                   read,
                   message: {
+                    id: e.message.id,
                     text: e.message.text,
                     createdAt: e.message.createdAt,
                   },

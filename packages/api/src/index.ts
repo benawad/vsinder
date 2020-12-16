@@ -48,6 +48,7 @@ import {
   UpdateUser,
   UserCodeImgs,
   ViewStruct,
+  DeleteMessageStruct
 } from "./validation";
 
 const SECONDS_IN_A_HALF_A_DAY = 86400 / 2;
@@ -553,7 +554,7 @@ const main = async () => {
         end "read",
         ma.id "matchId",
         u.id "userId", u.flair, u."photoUrl", u."displayName", date_part('epoch', ma."createdAt") * 1000 "createdAt",
-        (select json_build_object('text', text, 'createdAt', date_part('epoch', m."createdAt")*1000)
+        (select json_build_object('id',id,'text', text, 'createdAt', date_part('epoch', m."createdAt")*1000)
         from message m
         where (m."recipientId" = ma."userId1" and m."senderId" = ma."userId2")
         or
@@ -831,6 +832,45 @@ const main = async () => {
           text: m.text.slice(0, 100),
         });
       }
+    }
+  );
+
+  router.delete(
+    '/delete-message',
+    isAuth(),
+    rateLimitMiddleware(
+      new RateLimiterRedis({
+        ...defaultRateLimitOpts,
+        points: 500,
+        duration: SECONDS_IN_A_HALF_A_DAY,
+        blockDuration:0,
+        keyPrefix: "rl/delete-message"
+      }),
+      `You've hit the rate limit of 500 attempts, `,
+      true
+    ),
+    async (req: any, res, next) => {
+
+      try {
+        assert(req.body, DeleteMessageStruct);
+      } catch (err) {
+        console.log(err);
+        next(createError(400, err.message));
+        return;
+      }
+
+      if (
+        !(await Match.findOne(getUserIdOrder(req.userId, req.body.recipientId)))
+      ) {
+        next(createError(400, "you got unmatched"));
+        return;
+      }
+
+      const messageId = req.body.messageId;
+
+      await Message.delete(messageId);
+
+      res.send({ messageId });
     }
   );
 

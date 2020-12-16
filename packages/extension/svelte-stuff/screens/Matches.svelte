@@ -54,6 +54,7 @@
           ? {
               ...m,
               message: {
+                id: newMessage.id,
                 createdAt: newMessage.createdAt,
                 text: newMessage.text,
               },
@@ -65,6 +66,19 @@
 
   function onUnmatch(userId: string) {
     matches = matches.filter((x) => x.userId !== userId);
+  }
+
+  function onMessageDeleted(messageId: string) {
+    matches = matches
+      .map((m) =>
+        (m.userId === state?.user?.id && m?.message?.id === messageId)
+          ? {
+              ...m,
+              message: null
+            }
+          : m
+      )
+      .sort(compareMatches);
   }
 
   function onWindowMessage(event: any) {
@@ -205,7 +219,7 @@
   </Backbar>
 </main>
 {#if state.user && currentUser && isInMatches}
-  <Messages {onUnmatch} {onMessage} myId={currentUser.id} user={state.user} />
+  <Messages {onUnmatch} {onMessage} {onMessageDeleted} myId={currentUser.id} user={state.user} />
 {:else if loading || currentUserIsLoading}
   <LoadingSpinner />
 {:else if state.user && !currentUser}

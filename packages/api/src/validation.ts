@@ -68,6 +68,12 @@ export const GetMessageStruct = object({
   cursor: optional(number()),
 });
 
+export const DeleteMessageStruct = object({
+  recipientId: Uuid,
+  matchId: Uuid,
+  messageId: Uuid,
+});
+
 export const UnmatchStruct = object({
   userId: Uuid,
 });

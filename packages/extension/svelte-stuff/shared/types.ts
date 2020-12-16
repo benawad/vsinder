@@ -58,6 +58,7 @@ export interface Match {
   flair: string;
   read: boolean;
   message: {
+    id: string;
     text: string;
     createdAt: number;
   } | null;

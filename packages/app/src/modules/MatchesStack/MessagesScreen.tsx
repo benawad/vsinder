@@ -1,6 +1,7 @@
 import { MaterialIcons } from "@expo/vector-icons";
 import { produce } from "immer";
 import React, { useEffect } from "react";
+import { Clipboard } from "react-native";
 import { GiftedChat, IMessage, Send, Bubble } from "react-native-gifted-chat";
 import {
   useInfiniteQuery,
@@ -117,6 +118,49 @@ export const MessagesScreen: React.FC<MatchesStackNav<"messages">> = ({
         onPressAvatar={(u) =>
           navigation.navigate("viewCard", { id: u._id.toString() })
         }
+        onLongPress={(context, message: IMessage) => {
+          const allowDelete = meData.user?.id === message.user._id;
+          const options = ['Copy Text', ...(allowDelete ? ["Delete"] : []), 'Cancel'];
+          const cancelButtonIndex = options.length - 1;
+          context.actionSheet().showActionSheetWithOptions({ 
+            options, cancelButtonIndex 
+          }, (buttonIndex: number) => {
+            switch(buttonIndex) {
+              case 0:
+                Clipboard.setString(message.text);
+                break;
+              case 1:
+                if (allowDelete) {
+                  mutate([
+                    "/delete-message", 
+                    { "recipientId": params.id, "matchId": params.matchId, "messageId": message._id }, 
+                    "DELETE"
+                  ])
+                    .then(({ messageId }) => {
+                      cache.setQueryData<IMessageResponse[]>(qKey, (d) => {
+                        return produce(d!, (x) => {
+                          x[0].messages = x[0].messages.filter(message => message._id !== messageId)
+                        });
+                      });
+                      const d = cache.getQueryData<MatchesResponse>("/matches/0");
+                      if (d) {
+                        cache.setQueryData<MatchesResponse>("/matches/0", {
+                          matches: d.matches.map((m) =>
+                            (m.userId === params.id && m?.message?.id === messageId)
+                              ? {
+                                  ...m,
+                                  message: null,
+                                }
+                              : m
+                          ),
+                        });
+                      }
+                    });
+                }
+                break;
+            }
+          });
+        }}
         isLoadingEarlier={!!isFetchingMore}
         renderLoadEarlier={({ isLoadingEarlier }) =>
           isLoadingEarlier ? (
@@ -204,6 +248,7 @@ export const MessagesScreen: React.FC<MatchesStackNav<"messages">> = ({
                       ? {
                           ...m,
                           message: {
+                            id: newMessage.id,
                             text: newMessage.text,
                             createdAt: newMessage.createdAt,
                           },

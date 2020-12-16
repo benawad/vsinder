@@ -1,7 +1,7 @@
 export const mutation = async (
   path: string,
   body: any,
-  { method }: { method: "POST" | "PUT" } = { method: "POST" }
+  { method }: { method: "POST" | "PUT" | "DELETE" } = { method: "POST" }
 ) => {
   try {
     const r = await fetch(apiBaseUrl + path, {
