@@ -2,6 +2,7 @@ import { Entypo, MaterialCommunityIcons } from "@expo/vector-icons";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import React, { useEffect } from "react";
 import { AppState, AppStateStatus } from "react-native";
+import { useQueryCache } from "react-query";
 import { useTheme } from "../hooks/useTheme";
 import { getSocket } from "../Providers";
 import { MessageIcon } from "../ui/MessageIcon";
@@ -22,10 +23,12 @@ export const MainTabStack: React.FC<MainTabStackProps> = ({}) => {
     buttonBackground,
     buttonHoverBackground,
   } = useTheme();
+  const cache = useQueryCache();
 
   useEffect(() => {
     const _handleAppStateChange = (nextAppState: AppStateStatus) => {
       if (nextAppState === "active") {
+        cache.invalidateQueries(`/matches/0`);
         getSocket().reconnect();
       } else if (nextAppState === "background") {
         getSocket().close();
