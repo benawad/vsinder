@@ -691,6 +691,9 @@ const main = async () => {
 
       // sketchy not catching errors ;;
       Report.insert({ reporterId: req.userId, targetId: userId, message });
+      if (["hi", "hello", "hey"].includes((message as string).toLowerCase())) {
+        return;
+      }
       User.findOne(userId).then((u) => {
         fetch(process.env.SLACK_REPORT_URL, {
           method: "post",
