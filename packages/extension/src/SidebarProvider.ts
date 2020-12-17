@@ -56,6 +56,8 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
         case "logout": {
           await Util.globalState.update(accessTokenKey, "");
           await Util.globalState.update(refreshTokenKey, "");
+          SwiperPanel.kill();
+          ViewCodeCardPanel.kill();
           break;
         }
         case "delete-account": {
@@ -74,6 +76,8 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
                 payload: {},
               });
               vscode.window.showInformationMessage("successfully deleted");
+              SwiperPanel.kill();
+              ViewCodeCardPanel.kill();
             } catch {}
           }
           break;
