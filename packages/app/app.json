@@ -1,5 +1,6 @@
 {
   "expo": {
+    "userInterfaceStyle": "automatic",
     "name": "VSinder",
     "description": "Dating app for programmers",
     "slug": "vsinder",
@@ -16,9 +17,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "notification": {
       "icon": "./assets/notif-icon.png",
       "color": "#C14580",
