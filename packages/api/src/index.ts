@@ -545,7 +545,12 @@ const main = async () => {
         end "read",
         ma.id "matchId",
         u.id "userId", u.flair, u."photoUrl", u."displayName", date_part('epoch', ma."createdAt") * 1000 "createdAt",
-        (select json_build_object('text', text, 'createdAt', date_part('epoch', m."createdAt")*1000)
+        (select json_build_object('text',
+        case when char_length(text) > 40
+        then substr(text, 0, 40) || '...'
+        else text
+        end
+        , 'createdAt', date_part('epoch', m."createdAt")*1000)
         from message m
         where (m."recipientId" = ma."userId1" and m."senderId" = ma."userId2")
         or
