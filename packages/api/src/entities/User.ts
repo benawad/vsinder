@@ -68,8 +68,14 @@ export class User extends BaseEntity {
   @Column("text")
   photoUrl: string;
 
+  @Column("timestamp with time zone", { default: () => "CURRENT_TIMESTAMP" })
+  lastSwipe: Date;
+
   @Column("int", { default: 0 })
   numSwipes: number;
+
+  @Column("int", { default: 0 })
+  numSwipesToday: number;
 
   @Column("int", { default: 0 })
   numLikes: number;

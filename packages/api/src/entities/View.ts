@@ -1,6 +1,7 @@
 import {
   BaseEntity,
   Column,
+  CreateDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
@@ -32,4 +33,7 @@ export class View extends BaseEntity {
 
   @Column("boolean")
   liked: boolean;
+
+  @CreateDateColumn({ type: "timestamp with time zone" })
+  createdAt: Date;
 }

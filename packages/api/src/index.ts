@@ -23,7 +23,7 @@ import url from "url";
 import WebSocket, { Server } from "ws";
 import { createTokens } from "./auth/createTokens";
 import { isAuth } from "./auth/isAuth";
-import { activeSwipesMax, __prod__ } from "./constants";
+import { __prod__ } from "./constants";
 import { createConn } from "./createConn";
 import { Match } from "./entities/Match";
 import { Message } from "./entities/Message";
@@ -506,11 +506,13 @@ const main = async () => {
         and array_length("codeImgIds", 1) >= 1
         and "shadowBanned" != true
         order by
-          (case
-            when (v2 is not null)
-            then random() - .2
-            else random()
-          end) - u."numSwipes" / ${activeSwipesMax}
+          random()
+          - (case
+              when (v2 is not null)
+              then .2
+              else -least(current_timestamp::date - u."lastSwipe"::date, 14) / 14.0
+            end)
+          - LEAST(u."numSwipesToday", 20) / 20.0
         limit 20;
         `,
         user.goal === "love" ? loveParams : friendParams
@@ -919,7 +921,9 @@ const main = async () => {
       }
 
       User.update(req.userId, {
-        numSwipes: () => `LEAST("numSwipes" + 1, ${activeSwipesMax})`,
+        numSwipesToday: () => `"numSwipesToday" + 1`,
+        numSwipes: () => `"numSwipes" + 1`,
+        lastSwipe: () => "CURRENT_TIMESTAMP",
       });
     }
   );
