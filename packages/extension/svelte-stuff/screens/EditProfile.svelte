@@ -88,7 +88,7 @@
       required
       textArea
       name="bio"
-      label="Bio"
+      label="Bio {data.bio ? data.bio.length : 0}/150"
       bind:value={data.bio} />
   </div>
   <div>
