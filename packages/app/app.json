@@ -5,7 +5,7 @@
     "description": "Dating app for programmers",
     "slug": "vsinder",
     "scheme": "vsinder",
-    "version": "1.2.18",
+    "version": "1.2.19",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "primaryColor": "#002B36",
@@ -17,7 +17,9 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "notification": {
       "icon": "./assets/notif-icon.png",
       "color": "#C14580",
@@ -27,13 +29,13 @@
       "usesAppleSignIn": true,
       "supportsTablet": false,
       "bundleIdentifier": "com.benawad.vsinder",
-      "buildNumber": "1.2.18"
+      "buildNumber": "1.2.19"
     },
     "android": {
       "permissions": [],
       "useNextNotificationsApi": true,
       "googleServicesFile": "./google-services.json",
-      "versionCode": 390010218,
+      "versionCode": 390010219,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#002b36"
