@@ -365,10 +365,6 @@ const main = async () => {
       })
     ),
     async (req: any, res, next) => {
-      if (req.body.goal === "friendship") {
-        req.body.ageRangeMin = 18;
-        req.body.ageRangeMax = 33;
-      }
       if (!req.body.location) {
         req.body.location = "";
       }
@@ -488,10 +484,16 @@ const main = async () => {
         myAge,
         ...user.gendersToShow,
       ];
-      const friendWhere = `and goal = 'friendship' and date_part('year', age(birthday)) ${
+      const friendWhere = `
+        and goal = 'friendship'
+        and date_part('year', age(birthday)) ${
         myAge >= 18 ? ">=" : "<"
-      } 18`;
-      const friendParams = [req.userId, req.userId, req.userId];
+      } 18
+      and $${paramNum} <= date_part('year', age(birthday))
+      and $${paramNum + 1} >= date_part('year', age(birthday))
+      and "ageRangeMin" <= $${paramNum + 2}
+      and "ageRangeMax" >= $${paramNum + 3}`;
+      const friendParams = [req.userId, req.userId, req.userId, user.ageRangeMin, user.ageRangeMax, myAge, myAge];
 
       const profiles = await getConnection().query(
         `

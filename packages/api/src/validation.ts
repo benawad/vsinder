@@ -30,8 +30,8 @@ export const UpdateUser = object({
   location: length(string(), -1, 201),
   global: boolean(),
   birthday: pattern(string(), /^\d\d\d\d-\d\d-\d\d$/),
-  ageRangeMax: IntegerRange(17, 151),
-  ageRangeMin: IntegerRange(17, 151),
+  ageRangeMax: IntegerRange(-1, 151),
+  ageRangeMin: IntegerRange(-1, 151),
   flair: length(string(), -1, 100),
   pushToken: nullable(optional(string())),
 });

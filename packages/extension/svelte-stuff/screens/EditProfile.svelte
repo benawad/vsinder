@@ -142,6 +142,32 @@
       bind:value={data.goal}
       options={[{ label: age && age < 18 ? 'love 18+' : 'love', value: 'love' }, { label: 'friendship', value: 'friendship' }]} />
   </div>
+  <div>
+    <div class="label">Age Range:</div>
+    <div class="row">
+      <div class="row">
+        <InputField
+          required
+          type="number"
+          min={age && age < 18 ? 0 : 18}
+          max={age && age < 18 ? 18 : 151}
+          name="minAgeRange"
+          placeholder="18"
+          bind:value={data.ageRangeMin} />
+      </div>
+      <span />
+      <div class="row">
+        <InputField
+          required
+          placeholder="18"
+          type="number"
+          min={age && age < 18 ? 0 : 18}
+          max={age && age < 18 ? 18 : 151}
+          name="maxAgeRange"
+          bind:value={data.ageRangeMax} />
+      </div>
+    </div>
+  </div>
   {#if data.goal === 'love'}
     <div>
       <div class="label">Gender:</div>
@@ -157,32 +183,6 @@
           options={[{ label: 'males', value: 'male' }, { label: 'females', value: 'female' }, { label: 'non-binary', value: 'non-binary' }]} />
       </div>
     {/if}
-    <div>
-      <div class="label">Age Range:</div>
-      <div class="row">
-        <div class="row">
-          <InputField
-            required
-            type="number"
-            min={18}
-            max={150}
-            name="minAgeRange"
-            placeholder="18"
-            bind:value={data.ageRangeMin} />
-        </div>
-        <span />
-        <div class="row">
-          <InputField
-            required
-            placeholder="24"
-            type="number"
-            min={18}
-            max={150}
-            name="maxAgeRange"
-            bind:value={data.ageRangeMax} />
-        </div>
-      </div>
-    </div>
   {/if}
   <div style="padding-top: 20px;">
     <LoadingButton
