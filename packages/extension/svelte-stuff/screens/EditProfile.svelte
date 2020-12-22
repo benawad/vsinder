@@ -150,7 +150,7 @@
           required
           type="number"
           min={age && age < 18 ? 0 : 18}
-          max={age && age < 18 ? 18 : 151}
+          max={age && age < 18 ? 18 : 150}
           name="minAgeRange"
           placeholder="18"
           bind:value={data.ageRangeMin} />
@@ -162,7 +162,7 @@
           placeholder="18"
           type="number"
           min={age && age < 18 ? 0 : 18}
-          max={age && age < 18 ? 18 : 151}
+          max={age && age < 18 ? 18 : 150}
           name="maxAgeRange"
           bind:value={data.ageRangeMax} />
       </div>
