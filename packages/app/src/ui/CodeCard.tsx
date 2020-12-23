@@ -173,7 +173,7 @@ export const CodeCard: React.FC<CodeCardProps> = ({
           ) : null}
         </View>
       </View>
-      <View style={{ position: "absolute", backgroundColor: "#000000", borderRadius: 9, height: codeImageHeight - 10, width: codeImageWidth - 2, top: 2, left: 2 }} />
+      <View style={{ position: "absolute", backgroundColor: "#002B36", borderRadius: 9, height: codeImageHeight - 10, width: codeImageWidth - 2, top: 2, left: 2 }} />
       <CodeImage id={codeImgIds[imgIdx]} />
     </View>
   );
