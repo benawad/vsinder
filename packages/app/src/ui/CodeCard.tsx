@@ -3,7 +3,7 @@ import React, { useContext, useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Profile } from "../types";
 import { Avatar } from "./Avatar";
-import { CodeImage, codeImageWidth } from "./CodeImage";
+import { CodeImage, codeImageWidth, codeImageHeight } from "./CodeImage";
 import { Flair } from "./Flair";
 import { FullscreenImageZoomContext } from "./FullscreenImageZoom";
 import { MyButton } from "./MyButton";
@@ -18,7 +18,7 @@ interface CodeCardProps {
 
 const indicatorStyles = StyleSheet.create({
   indicator: {
-    position: "absolute", zIndex: 2, width: "100%", top: 5, alignItems: "center" 
+    position: "absolute", zIndex: 2, width: "100%", top: 5, alignItems: "center"
   },
   flexGrid: {
     display: "flex", flexDirection: "row", width: "95%", position: "relative"
@@ -173,6 +173,7 @@ export const CodeCard: React.FC<CodeCardProps> = ({
           ) : null}
         </View>
       </View>
+      <View style={{ position: "absolute", backgroundColor: "#000000", borderRadius: 9, height: codeImageHeight - 10, width: codeImageWidth - 2, top: 2, left: 2 }} />
       <CodeImage id={codeImgIds[imgIdx]} />
     </View>
   );
