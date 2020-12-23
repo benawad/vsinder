@@ -8,6 +8,7 @@ import { Flair } from "./Flair";
 import { FullscreenImageZoomContext } from "./FullscreenImageZoom";
 import { MyButton } from "./MyButton";
 import { ReportDialog } from "./ReportDialog";
+import { ThemeContext } from "../ThemeProvider";
 
 type Fn = (message: string) => void;
 
@@ -41,6 +42,7 @@ export const CodeCard: React.FC<CodeCardProps> = ({
   const [expand, setExpand] = useState(false);
   const [imgIdx, setImgIdx] = useState(0);
   const setSrc = useContext(FullscreenImageZoomContext);
+  const [{ editorBackground }] = useContext(ThemeContext);
 
   return (
     <View style={{ position: "relative" }}>
@@ -173,7 +175,7 @@ export const CodeCard: React.FC<CodeCardProps> = ({
           ) : null}
         </View>
       </View>
-      <View style={{ position: "absolute", backgroundColor: "#002B36", borderRadius: 9, height: codeImageHeight - 10, width: codeImageWidth - 2, top: 2, left: 2 }} />
+      <View style={{ position: "absolute", backgroundColor: editorBackground, borderRadius: 9, height: codeImageHeight - 10, width: codeImageWidth - 2, top: 2, left: 2 }} />
       <CodeImage id={codeImgIds[imgIdx]} />
     </View>
   );
