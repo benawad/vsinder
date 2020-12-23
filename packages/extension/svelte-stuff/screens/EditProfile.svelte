@@ -152,14 +152,14 @@
           min={age && age < 18 ? 0 : 18}
           max={age && age < 18 ? 18 : 150}
           name="minAgeRange"
-          placeholder="18"
+          placeholder={age && age < 18 ? "14" : "18"}
           bind:value={data.ageRangeMin} />
       </div>
       <span />
       <div class="row">
         <InputField
           required
-          placeholder="18"
+          placeholder={age && age < 18 ? "18" : "24"}
           type="number"
           min={age && age < 18 ? 0 : 18}
           max={age && age < 18 ? 18 : 150}
