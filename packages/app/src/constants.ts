@@ -589,7 +589,7 @@ export const THEMES = [
 ];
 
 export const apiBaseUrl = __DEV__
-  ? "http://192.168.1.165:3001"
+  ? "http://192.168.0.7:3001"
   : "https://api.vsinder.com";
 export const accessTokenKey = "vsinder.token";
 export const refreshTokenKey = "vsinder.refresh-token";

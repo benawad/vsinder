@@ -32,7 +32,6 @@
     "android": {
       "permissions": [],
       "useNextNotificationsApi": true,
-      "googleServicesFile": "./google-services.json",
       "versionCode": 390010218,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
