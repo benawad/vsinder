@@ -1,7 +1,16 @@
 import { sign } from "jsonwebtoken";
 import { User } from "../entities/User";
 
-export const createTokens = (user: User) => {
+export type RefreshTokenData = {
+  userId: string;
+  tokenVersion?: number;
+};
+
+export type AccessTokenData = {
+  userId: string;
+};
+
+export const createTokens = (user: User): { refreshToken: string, accessToken: string } => {
   const refreshToken = sign(
     { userId: user.id, tokenVersion: user.tokenVersion },
     process.env.REFRESH_TOKEN_SECRET,
