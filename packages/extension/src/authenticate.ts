@@ -21,8 +21,11 @@ export const authenticate = (
       return;
     }
 
-    await Util.globalState.update(accessTokenKey, accessToken);
-    await Util.globalState.update(refreshTokenKey, refreshToken);
+    await Promise.all([
+      Util.globalState.update(accessTokenKey, accessToken),
+      Util.globalState.update(refreshTokenKey, refreshToken),
+    ]);
+
     fn({ accessToken, refreshToken });
 
     res.end(`

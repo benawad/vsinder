@@ -157,8 +157,10 @@ export class ViewCodeCardPanel {
           break;
         }
         case "tokens": {
-          await Util.globalState.update(accessTokenKey, data.accessToken);
-          await Util.globalState.update(refreshTokenKey, data.refreshToken);
+          await Promise.all([
+            Util.globalState.update(accessTokenKey, data.accessToken),
+            Util.globalState.update(refreshTokenKey, data.refreshToken),
+          ]);
           break;
         }
       }
@@ -166,7 +168,7 @@ export class ViewCodeCardPanel {
   }
 
   private _getHtmlForWebview(webview: vscode.Webview) {
-    // // And the uri we use to load this script in the webview
+    // And the uri we use to load this script in the webview
     const scriptUri = webview.asWebviewUri(
       vscode.Uri.joinPath(
         this._extensionUri,

@@ -27,8 +27,10 @@ export const mutation = async (path: string, body: any) => {
     const accessToken = r.headers.get("access-token");
     const refreshToken = r.headers.get("refresh-token");
     if (accessToken && refreshToken) {
-      await Util.globalState.update(accessTokenKey, accessToken);
-      await Util.globalState.update(refreshTokenKey, refreshToken);
+      await Promise.all([
+        Util.globalState.update(accessTokenKey, accessToken),
+        Util.globalState.update(refreshTokenKey, refreshToken),
+      ]);
     }
     const d = await r.json();
     return d;

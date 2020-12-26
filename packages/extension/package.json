@@ -101,7 +101,6 @@
     "webpack-cli": "^4.2.0"
   },
   "dependencies": {
-    "btoa": "^1.2.1",
     "date-fns": "^2.16.1",
     "node-fetch": "^2.6.1",
     "polka": "^0.5.2",

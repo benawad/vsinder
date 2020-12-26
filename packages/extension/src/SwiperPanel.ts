@@ -147,8 +147,10 @@ export class SwiperPanel {
           break;
         }
         case "tokens": {
-          await Util.globalState.update(accessTokenKey, data.accessToken);
-          await Util.globalState.update(refreshTokenKey, data.refreshToken);
+          await Promise.all([
+            Util.globalState.update(accessTokenKey, data.accessToken),
+            Util.globalState.update(refreshTokenKey, data.refreshToken),
+          ]);
           break;
         }
       }

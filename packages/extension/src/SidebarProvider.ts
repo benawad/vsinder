@@ -54,8 +54,10 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
           break;
         }
         case "logout": {
-          await Util.globalState.update(accessTokenKey, "");
-          await Util.globalState.update(refreshTokenKey, "");
+          await Promise.all([
+            Util.globalState.update(accessTokenKey, ""),
+            Util.globalState.update(refreshTokenKey, ""),
+          ]);
           SwiperPanel.kill();
           ViewCodeCardPanel.kill();
           break;
@@ -68,9 +70,11 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
           );
           if (y === "yes") {
             try {
-              await mutation("/account/delete", {});
-              await Util.globalState.update(accessTokenKey, "");
-              await Util.globalState.update(refreshTokenKey, "");
+              await Promise.all([
+                mutation("/account/delete", {}),
+                Util.globalState.update(accessTokenKey, ""),
+                Util.globalState.update(refreshTokenKey, ""),
+              ]);
               webviewView.webview.postMessage({
                 command: "account-deleted",
                 payload: {},
@@ -122,8 +126,10 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
           break;
         }
         case "tokens": {
-          await Util.globalState.update(accessTokenKey, data.accessToken);
-          await Util.globalState.update(refreshTokenKey, data.refreshToken);
+          await Promise.all([
+            Util.globalState.update(accessTokenKey, data.accessToken),
+            Util.globalState.update(refreshTokenKey, data.refreshToken),
+          ]);
           break;
         }
       }

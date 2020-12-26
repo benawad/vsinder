@@ -28,12 +28,14 @@ export function activate(context: vscode.ExtensionContext) {
 
   context.subscriptions.push(
     vscode.commands.registerCommand("vsinder.reloadSidebar", async () => {
-      await vscode.commands.executeCommand("workbench.action.closeSidebar");
-      await vscode.commands.executeCommand(
-        "workbench.view.extension.vsinder-sidebar-view"
-      );
-      setTimeout(() => {
+      await Promise.all([
+        vscode.commands.executeCommand("workbench.action.closeSidebar"),
         vscode.commands.executeCommand(
+          "workbench.view.extension.vsinder-sidebar-view"
+        )
+      ]);
+      setTimeout(async () => {
+        await vscode.commands.executeCommand(
           "workbench.action.webview.openDeveloperTools"
         );
       }, 500);
@@ -52,10 +54,8 @@ export function activate(context: vscode.ExtensionContext) {
         vscode.window.showErrorMessage("I don't see any code");
         return;
       }
-      let text = activeTextEditor.document.getText(activeTextEditor.selection);
-      if (!text) {
-        text = activeTextEditor.document.getText();
-      }
+      const text = activeTextEditor.document.getText(activeTextEditor.selection) ||
+        activeTextEditor.document.getText();
 
       if (!text) {
         vscode.window.showErrorMessage(`I couldn't get any code`);
@@ -63,7 +63,6 @@ export function activate(context: vscode.ExtensionContext) {
       }
 
       if (text.length > 600) {
-        text = text.slice(0, 600);
         vscode.window.showWarningMessage(
           `Only taking the first 600 characters`
         );
@@ -76,7 +75,7 @@ export function activate(context: vscode.ExtensionContext) {
       sidebarProvider._view?.webview.postMessage({
         command: "new-code-snippet",
         data: {
-          code: text,
+          code: text.slice(0, 600),
           language:
             languageId in languageIdMap
               ? languageIdMap[languageId as keyof typeof languageIdMap]

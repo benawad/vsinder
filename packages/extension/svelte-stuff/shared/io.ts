@@ -5,10 +5,7 @@ export const getSocket = () => {
   if (!socket) {
     socket = new ReconnectingWebSocket(
       () =>
-        (apiBaseUrl.includes("https")
-          ? apiBaseUrl.replace("https", "wss")
-          : apiBaseUrl.replace("http", "ws")) +
-        `?accessToken=${accessToken}&refreshToken=${refreshToken}`
+        `${apiBaseUrl.replace("http", "ws")}?accessToken=${accessToken}&refreshToken=${refreshToken}`
     );
   }
 
