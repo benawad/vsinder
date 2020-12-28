@@ -103,7 +103,7 @@ const main = async () => {
             profileUrl: profile.profileUrl,
             username: profile.username,
           };
-          if (data.photoUrl && data.photoUrl.includes("?")) {
+          if (data.photoUrl?.includes("?")) {
             let m;
             if (
               user?.photoUrl &&
@@ -574,9 +574,7 @@ const main = async () => {
     isAuth(),
     async (req: any, res, next) => {
       try {
-        req.params.cursor = req.params.cursor
-          ? parseInt(req.params.cursor)
-          : undefined;
+        req.params.cursor = req.params.cursor && parseInt(req.params.cursor);
         assert(req.params, GetMessageStruct);
       } catch (err) {
         next(createError(400, err.message));
@@ -694,7 +692,7 @@ const main = async () => {
       if (["hi", "hello", "hey"].includes((message as string).toLowerCase())) {
         return;
       }
-      User.findOne(userId).then((u) => {
+      await User.findOne(userId).then((u) => {
         fetch(process.env.SLACK_REPORT_URL, {
           method: "post",
           headers: {
@@ -919,11 +917,11 @@ const main = async () => {
       }
 
       if (liked) {
-        User.update(userId, { numLikes: () => '"numLikes" + 1' });
+        await User.update(userId, { numLikes: () => '"numLikes" + 1' });
         wsSend(userId, { type: "new-like" });
       }
 
-      User.update(req.userId, {
+      await User.update(req.userId, {
         numSwipesToday: () => `"numSwipesToday" + 1`,
         numSwipes: () => `"numSwipes" + 1`,
         lastSwipe: () => "CURRENT_TIMESTAMP",
@@ -1029,10 +1027,8 @@ const main = async () => {
         type,
         userId: openChatUserId,
       }: { type: "message-open"; userId: string } = JSON.parse(e);
-      if (type === "message-open") {
-        if (userId in wsUsers) {
-          wsUsers[userId].openChatUserId = openChatUserId;
-        }
+      if (type === "message-open" && userId in wsUsers) {
+        wsUsers[userId].openChatUserId = openChatUserId;
       }
     });
 
@@ -1078,7 +1074,7 @@ const main = async () => {
         ) as any;
         const user = await User.findOne(data.userId);
         // token has been invalidated or user deleted
-        if (!user || user.tokenVersion !== data.tokenVersion) {
+        if (user?.tokenVersion !== data.tokenVersion) {
           return bad();
         }
         return good(data.userId);
@@ -1087,7 +1083,7 @@ const main = async () => {
 
     return bad();
   });
-  server.listen(process.env.PORT ? parseInt(process.env.PORT) : 3001, () => {
+  server.listen(parseInt(process.env.PORT || '3001'), () => {
     console.log("server started");
   });
 };
