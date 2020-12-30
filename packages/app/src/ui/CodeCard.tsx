@@ -1,13 +1,14 @@
 import { Feather } from "@expo/vector-icons";
 import React, { useContext, useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Profile } from "../types";
 import { Avatar } from "./Avatar";
-import { CodeImage, codeImageWidth } from "./CodeImage";
+import { CodeImage, codeImageWidth, codeImageHeight } from "./CodeImage";
 import { Flair } from "./Flair";
 import { FullscreenImageZoomContext } from "./FullscreenImageZoom";
 import { MyButton } from "./MyButton";
 import { ReportDialog } from "./ReportDialog";
+import { ThemeContext } from "../ThemeProvider";
 
 type Fn = (message: string) => void;
 
@@ -16,6 +17,24 @@ interface CodeCardProps {
   onReport: Fn | undefined;
 }
 
+const indicatorStyles = StyleSheet.create({
+  indicator: {
+    position: "absolute", zIndex: 2, width: "100%", top: 5, alignItems: "center"
+  },
+  flexGrid: {
+    display: "flex", flexDirection: "row", width: "95%", position: "relative"
+  },
+  col: {
+    flex: 1, margin: 1, borderRadius: 3
+  },
+  inactive: {
+    backgroundColor: "#999999", opacity: 0.5, padding: 1
+  },
+  active: {
+    backgroundColor: "#ffffff", opacity: 1, padding: 2, borderWidth: 1, borderStyle: "solid", borderColor: "#000000"
+  },
+});
+
 export const CodeCard: React.FC<CodeCardProps> = ({
   onReport,
   profile: { codeImgIds, photoUrl, displayName, age, flair, bio },
@@ -23,9 +42,22 @@ export const CodeCard: React.FC<CodeCardProps> = ({
   const [expand, setExpand] = useState(false);
   const [imgIdx, setImgIdx] = useState(0);
   const setSrc = useContext(FullscreenImageZoomContext);
+  const [{ editorBackground }] = useContext(ThemeContext);
 
   return (
     <View style={{ position: "relative" }}>
+      <View style={indicatorStyles.indicator}>
+        {codeImgIds.length > 1 && (<View
+          style={indicatorStyles.flexGrid}
+        >
+          {codeImgIds.map((_, index) => {
+            return <View
+              key={index}
+              style={[indicatorStyles.col, (index === (imgIdx || 0)) ? indicatorStyles.active : indicatorStyles.inactive]}
+            />
+          })}
+        </View>)}
+      </View>
       <View
         style={{
           position: "absolute",
@@ -143,6 +175,7 @@ export const CodeCard: React.FC<CodeCardProps> = ({
           ) : null}
         </View>
       </View>
+      <View style={{ position: "absolute", backgroundColor: editorBackground, borderRadius: 9, height: codeImageHeight - 10, width: codeImageWidth - 2, top: 2, left: 2 }} />
       <CodeImage id={codeImgIds[imgIdx]} />
     </View>
   );
