@@ -43,6 +43,24 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
           }
           break;
         }
+        case "unmatch": {
+          const y = await vscode.window.showInformationMessage(
+            `Are you sure you want to unmatch "${data.value.userName}"?`,
+            "Yes",
+            "No"
+          );
+          if (y === "Yes") {
+            try {
+              await mutation(`/unmatch`, { userId: data.value.userId });
+              webviewView.webview.postMessage({
+                command: "unmatch-done",
+                payload: {},
+              });
+              vscode.window.showInformationMessage(`You unmatched "${data.value.userName}"`);
+            } catch {}
+          }
+          break;
+        }
         case "send-tokens": {
           webviewView.webview.postMessage({
             command: "init-tokens",
