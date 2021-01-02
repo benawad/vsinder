@@ -70,8 +70,8 @@ export class SidebarProvider implements vscode.WebviewViewProvider {
           );
           if (y === "yes") {
             try {
+              await mutation("/account/delete", {}),
               await Promise.all([
-                mutation("/account/delete", {}),
                 Util.globalState.update(accessTokenKey, ""),
                 Util.globalState.update(refreshTokenKey, ""),
               ]);

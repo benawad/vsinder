@@ -34,8 +34,8 @@ export function activate(context: vscode.ExtensionContext) {
           "workbench.view.extension.vsinder-sidebar-view"
         )
       ]);
-      setTimeout(async () => {
-        await vscode.commands.executeCommand(
+      setTimeout(() => {
+        vscode.commands.executeCommand(
           "workbench.action.webview.openDeveloperTools"
         );
       }, 500);
