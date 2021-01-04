@@ -6,7 +6,10 @@
     "dev": "rollup -c -w",
     "start": "sirv public",
     "validate": "svelte-check",
-    "magic": "npm run build && mv public/index.html public/leaderboard.html && mv static/* public/"
+    "magic": "npm run build && mkdir -p tmp && cp public/index.html tmp/leaderboard.html &&  cp -r public/* tmp/ && cp -r static/* tmp/",
+    "netlify": "source .env && netlify deploy --prod -d tmp -s $SITE_ID",
+    "cleanup": "rm -rf tmp",
+    "deploy": "npm run magic && npm run netlify && npm run cleanup"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^16.0.0",

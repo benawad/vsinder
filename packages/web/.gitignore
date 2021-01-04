@@ -2,3 +2,5 @@
 /public/build/
 
 .DS_Store
+.netlify
+.env
