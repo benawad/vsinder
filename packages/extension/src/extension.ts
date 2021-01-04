@@ -28,12 +28,10 @@ export function activate(context: vscode.ExtensionContext) {
 
   context.subscriptions.push(
     vscode.commands.registerCommand("vsinder.reloadSidebar", async () => {
-      await Promise.all([
-        vscode.commands.executeCommand("workbench.action.closeSidebar"),
-        vscode.commands.executeCommand(
-          "workbench.view.extension.vsinder-sidebar-view"
-        )
-      ]);
+      await vscode.commands.executeCommand("workbench.action.closeSidebar");
+      await vscode.commands.executeCommand(
+        "workbench.view.extension.vsinder-sidebar-view"
+      );
       setTimeout(() => {
         vscode.commands.executeCommand(
           "workbench.action.webview.openDeveloperTools"
