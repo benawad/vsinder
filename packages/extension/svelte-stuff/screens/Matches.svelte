@@ -26,7 +26,6 @@
   export let currentUser: User | null;
   export let state: MatchState;
   export let onNewState: (s: State) => void;
-  let loadingUnmatch = false;
   let cursor = 0;
   let loading = true;
   let matches: Match[] = [];
@@ -75,6 +74,14 @@
           onUnmatch(state.user.id);
           state = { page: "matches" };
         }
+        break;
+
+      case "unmatch-done":
+        if (state.user) {
+          onUnmatch(state.user.id);
+          state = { page: 'matches' };
+        }
+
         break;
     }
   }
@@ -186,16 +193,12 @@
         </div>
         <LoadingButton
           lt
-          disabled={loadingUnmatch}
           on:click={async () => {
             if (state.user) {
-              loadingUnmatch = true;
-              try {
-                await mutation(`/unmatch`, { userId: state.user.id });
-                onUnmatch(state.user.id);
-                state = { page: 'matches' };
-              } catch {}
-              loadingUnmatch = false;
+              tsvscode.postMessage({
+                type: 'unmatch',
+                value: { userId: state.user.id, userName: state.user.displayName }
+              });
             }
           }}>
           unmatch
