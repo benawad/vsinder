@@ -73,7 +73,7 @@ export const ViewProfile: React.FC<ProfileStackNav<"viewProfile">> = ({
             onPress={() => navigation.navigate("editProfile")}
             secondary
           >
-            edit profile
+            Edit profile
           </MyButton>
         </View>
         <View style={{ width: "100%", marginTop: 20 }}>
@@ -90,7 +90,7 @@ export const ViewProfile: React.FC<ProfileStackNav<"viewProfile">> = ({
             }}
             secondary
           >
-            edit code pics
+            Edit code pics
           </MyButton>
         </View>
         <View style={{ width: "100%", marginTop: 20 }}>
@@ -101,11 +101,11 @@ export const ViewProfile: React.FC<ProfileStackNav<"viewProfile">> = ({
             }}
             secondary
           >
-            report a bug
+            Report a bug
           </MyButton>
         </View>
         <MyText style={{ marginTop: 40 }}>
-          (to change your profile picture, you need to change it on GitHub then
+          (To change your profile picture, you need to change it on GitHub then
           logout and login again)
         </MyText>
       </View>

@@ -151,7 +151,7 @@ export const ManageCodePics: React.FC<ProfileStackNav<"manageCodePics">> = ({
           } catch {}
         }}
       >
-        {loadingSomeImgs ? " wait for imgs to finish generating" : "save"}
+        {loadingSomeImgs ? "Wait while images are getting generated" : "Save"}
       </LoadingButton>
     </ScreenWrapper>
   );

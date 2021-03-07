@@ -14,6 +14,6 @@
 </style>
 
 <div>
-  <SmallButton on:click={onBack}>&lt; back</SmallButton>
+  <SmallButton on:click={onBack}>&lt; Back</SmallButton>
   <slot />
 </div>

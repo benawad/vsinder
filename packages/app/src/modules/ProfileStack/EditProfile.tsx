@@ -142,12 +142,12 @@ export const EditProfile: React.FC<ProfileStackNav<"editProfile">> = ({
                     ...(age >= 18
                       ? [
                           {
-                            label: "love",
+                            label: "Love",
                             value: "love",
                           },
                         ]
                       : []),
-                    { label: "friendship", value: "friendship" },
+                    { label: "Friendship", value: "friendship" },
                   ]}
                 />
               </FormSpacer>
@@ -158,9 +158,9 @@ export const EditProfile: React.FC<ProfileStackNav<"editProfile">> = ({
                       name="gender"
                       label="Gender:"
                       options={[
-                        { label: "male", value: "male" },
-                        { label: "female", value: "female" },
-                        { label: "non-binary", value: "non-binary" },
+                        { label: "Male", value: "male" },
+                        { label: "Female", value: "female" },
+                        { label: "Non-binary", value: "non-binary" },
                       ]}
                     />
                   </FormSpacer>
@@ -169,9 +169,9 @@ export const EditProfile: React.FC<ProfileStackNav<"editProfile">> = ({
                       name="gendersToShow"
                       label="Show me code from:"
                       options={[
-                        { label: "males", value: "male" },
-                        { label: "females", value: "female" },
-                        { label: "non-binary", value: "non-binary" },
+                        { label: "Males", value: "male" },
+                        { label: "Females", value: "female" },
+                        { label: "Non-binary", value: "non-binary" },
                       ]}
                     />
                   </FormSpacer>
@@ -214,7 +214,7 @@ export const EditProfile: React.FC<ProfileStackNav<"editProfile">> = ({
                   onPress={() =>
                     setFieldValue("sendNotifs", !values.sendNotifs)
                   }
-                  label="send me them on new matches/messages"
+                  label="Send me them on new matches/messages"
                 />
               </FormSpacer>
               <View style={{ paddingTop: 10 }}>
@@ -223,7 +223,7 @@ export const EditProfile: React.FC<ProfileStackNav<"editProfile">> = ({
                     isLoading={mutIsLoading}
                     onPress={() => handleSubmit()}
                   >
-                    {data!.user!.codeImgIds.length ? "save" : "next"}
+                    {data!.user!.codeImgIds.length ? "Save" : "Next"}
                   </LoadingButton>
                 )}
               </View>

@@ -149,7 +149,7 @@ export const CodeSnippeter: React.FC<ProfileStackNav<"codeSnippeter">> = ({
                 ) : null}
               </FormSpacer>
               <MyButton onPress={() => handleSubmit()}>
-                save code snippet
+                Save code snippet
               </MyButton>
               <View style={{ height: 30 }} />
             </KeyboardAwareScrollView>

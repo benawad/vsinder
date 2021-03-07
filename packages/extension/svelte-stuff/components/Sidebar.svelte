@@ -251,7 +251,7 @@
     {/if}
     <EditProfile
       bind:data={state.data}
-      buttonText={currentUser?.codeImgIds.length ? 'save' : 'next'}
+      buttonText={currentUser?.codeImgIds.length ? 'Save' : 'Next'}
       onNext={(user) => {
         currentUser = user;
         if (currentUser.codeImgIds.length) {
@@ -268,7 +268,7 @@
     <button
       on:click={() => {
         tsvscode.postMessage({ type: 'login' });
-      }}>login with GitHub to get started</button>
+      }}>Login with GitHub to get started</button>
   {:else if state.page === 'code-snippet'}
     <Backbar
       onBack={() => {

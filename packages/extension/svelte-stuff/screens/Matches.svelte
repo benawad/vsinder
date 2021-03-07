@@ -188,7 +188,7 @@
                 });
               }
             }}>
-            report
+            Report
           </SmallButton>
         </div>
         <LoadingButton
@@ -201,7 +201,7 @@
               });
             }
           }}>
-          unmatch
+          Unmatch
         </LoadingButton>
       </div>
     {/if}
@@ -219,7 +219,7 @@
 {:else}
   <div class="container">
     {#if matches.length === 0}
-      <div>no matches</div>
+      <div>No matches</div>
     {/if}
     {#each matches as match, i}
       <div
