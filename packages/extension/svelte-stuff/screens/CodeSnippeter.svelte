@@ -64,10 +64,10 @@
   </div>
   <div>
     <a
-      href="https://dreamy-ptolemy-eb4e80.netlify.app/?code={encodeURIComponent(data.code)}&l={encodeURIComponent(data.language)}&t={encodeURIComponent(data.theme)}&fm={encodeURIComponent(data.fontFamily)}&fs=14px">click
+      href="https://dreamy-ptolemy-eb4e80.netlify.app/?code={encodeURIComponent(data.code)}&l={encodeURIComponent(data.language)}&t={encodeURIComponent(data.theme)}&fm={encodeURIComponent(data.fontFamily)}&fs=14px">Click
       to preview</a>
     <div class="note">
-      note: the canvas will be set to width 400px and height
+      Note: The canvas will be set to width 400px and height
       {Math.floor((400 * 10) / 7)}px for the image
     </div>
   </div>
@@ -79,7 +79,7 @@
         }
       }}
       type="button">
-      save code snippet
+      Save code snippet
     </button>
   </div>
 </main>

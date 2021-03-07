@@ -251,7 +251,7 @@
     {/if}
     <EditProfile
       bind:data={state.data}
-      buttonText={currentUser?.codeImgIds.length ? 'save' : 'next'}
+      buttonText={currentUser?.codeImgIds.length ? 'Save' : 'Next'}
       onNext={(user) => {
         currentUser = user;
         if (currentUser.codeImgIds.length) {
