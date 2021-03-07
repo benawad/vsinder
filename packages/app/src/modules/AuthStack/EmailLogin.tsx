@@ -39,7 +39,7 @@ export const EmailLogin: React.FC<AuthStackNav<"EmailLogin">> = ({
             <>
               <FormSpacer>
                 <TextField
-                  label="email"
+                  label="Email"
                   textContentType="emailAddress"
                   autoCapitalize="none"
                   name="email"
@@ -48,7 +48,7 @@ export const EmailLogin: React.FC<AuthStackNav<"EmailLogin">> = ({
               <FormSpacer>
                 <TextField
                   autoCapitalize="none"
-                  label="password"
+                  label="Password"
                   secureTextEntry
                   textContentType="password"
                   name="password"
@@ -58,7 +58,7 @@ export const EmailLogin: React.FC<AuthStackNav<"EmailLogin">> = ({
                 isLoading={isLoading}
                 onPress={() => handleSubmit()}
               >
-                login
+                Login
               </LoadingButton>
             </>
           )}

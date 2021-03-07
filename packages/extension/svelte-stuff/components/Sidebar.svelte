@@ -268,7 +268,7 @@
     <button
       on:click={() => {
         tsvscode.postMessage({ type: 'login' });
-      }}>login with GitHub to get started</button>
+      }}>Login with GitHub to get started</button>
   {:else if state.page === 'code-snippet'}
     <Backbar
       onBack={() => {

@@ -45,7 +45,7 @@ export const Settings: React.FC<ProfileStackNav<"settings">> = ({
     <ScreenWrapper noPadding>
       <ScrollView alwaysBounceVertical={false}>
         <Cell onPress={() => navigation.navigate("changeTheme")}>
-          change theme
+          Change theme
         </Cell>
         <Cell
           onPress={async () => {
@@ -91,7 +91,7 @@ export const Settings: React.FC<ProfileStackNav<"settings">> = ({
             }
           }}
         >
-          check for update
+          Check for update
         </Cell>
         <Cell
           onPress={() => {
@@ -116,7 +116,7 @@ export const Settings: React.FC<ProfileStackNav<"settings">> = ({
             );
           }}
         >
-          logout
+          Logout
         </Cell>
         <Cell
           onPress={() => {
@@ -144,7 +144,7 @@ export const Settings: React.FC<ProfileStackNav<"settings">> = ({
             );
           }}
         >
-          delete account
+          Delete account
         </Cell>
         <MyText
           style={{ textAlign: "center", marginTop: 60, marginBottom: 40 }}
