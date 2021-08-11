@@ -57,11 +57,11 @@ export const LoginScreen: React.FC<AuthStackNav<"login">> = ({
               </MyText>
               <View style={{ flexDirection: "row" }}>
                 <MyButton style={{ flex: 1 }} onPress={() => setOpen(false)}>
-                  yes
+                  Yes
                 </MyButton>
                 <View style={{ width: 20 }} />
                 <MyButton style={{ flex: 1 }} onPress={() => setUnderAge(true)}>
-                  no
+                  No
                 </MyButton>
               </View>
             </Center>
@@ -76,8 +76,8 @@ export const LoginScreen: React.FC<AuthStackNav<"login">> = ({
               style={{ marginBottom: 40 }}
             >
               <MyText style={{ textDecorationLine: "underline" }}>
-                By tapping Sign in/login with Github, Apple, or Email, you agree
-                to our terms
+                By tapping Sign in/Login with Github, Apple, or Email, you agree
+                to our terms.
               </MyText>
             </TouchableOpacity>
           ) : (
@@ -127,10 +127,10 @@ export const LoginScreen: React.FC<AuthStackNav<"login">> = ({
               } catch (err) {
                 console.log("ERROR:", err);
               }
-              showMessage({ message: "something went wrong", type: "danger" });
+              showMessage({ message: "Something went wrong", type: "danger" });
             }}
           >
-            {appleSignIn ? `link GitHub` : `login with GitHub to get started`}
+            {appleSignIn ? `Link GitHub` : `Login with GitHub to get started`}
           </MyButton>
           {Platform.OS === "ios" && !appleSignIn ? (
             <>
@@ -173,7 +173,7 @@ export const LoginScreen: React.FC<AuthStackNav<"login">> = ({
                 secondary
                 onPress={() => navigation.navigate("EmailLogin")}
               >
-                login with email
+                Login with email
               </MyButton>
             </>
           ) : null}

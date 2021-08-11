@@ -115,7 +115,7 @@
   {#if codeImgIds.length < 6}
     <div class="pb">
       <SmallButton className="secondary" on:click={onWantsToAddAnotherImg}>
-        + add another
+        + Add another
       </SmallButton>
     </div>
   {/if}
@@ -141,7 +141,7 @@
       disabled = false;
     }}>
     {#if atleastOneImgIsLoading}
-      wait for imgs to finish generating
-    {:else}save{/if}
+      Wait for imgs to finish generating
+    {:else}Save{/if}
   </LoadingButton>
 </div>

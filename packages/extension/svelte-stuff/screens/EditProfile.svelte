@@ -140,21 +140,21 @@
     <div class="label">I'm looking for:</div>
     <RadioGroup
       bind:value={data.goal}
-      options={[{ label: age && age < 18 ? 'love 18+' : 'love', value: 'love' }, { label: 'friendship', value: 'friendship' }]} />
+      options={[{ label: age && age < 18 ? 'Love 18+' : 'Love', value: 'love' }, { label: 'Friendship', value: 'friendship' }]} />
   </div>
   {#if data.goal === 'love'}
     <div>
       <div class="label">Gender:</div>
       <RadioGroup
         bind:value={data.gender}
-        options={[{ label: 'male', value: 'male' }, { label: 'female', value: 'female' }, { label: 'non-binary', value: 'non-binary' }]} />
+        options={[{ label: 'Male', value: 'male' }, { label: 'Female', value: 'female' }, { label: 'Non-binary', value: 'non-binary' }]} />
     </div>
     {#if data.gendersToShow}
       <div>
         <div class="label">Show me code from:</div>
         <CheckboxGroup
           bind:value={data.gendersToShow}
-          options={[{ label: 'males', value: 'male' }, { label: 'females', value: 'female' }, { label: 'non-binary', value: 'non-binary' }]} />
+          options={[{ label: 'Males', value: 'male' }, { label: 'Females', value: 'female' }, { label: 'Non-binary', value: 'non-binary' }]} />
       </div>
     {/if}
     <div>

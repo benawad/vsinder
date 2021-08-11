@@ -106,7 +106,7 @@
         {/if}
       </div>
       <div class="mb">
-        <button class="secondary" on:click={() => onEditProfile()}>edit profile</button>
+        <button class="secondary" on:click={() => onEditProfile()}>Edit profile</button>
       </div>
       <div class="mb">
         <button
@@ -116,21 +116,24 @@
               onEditCode(currentUser.codeImgIds);
             }
           }}>
-          edit code pics
+          Edit code pics
         </button>
       </div>
       <button
         type="button"
         on:click={() => {
           tsvscode.postMessage({ type: 'start-swiping' });
-        }}>start swiping</button>
+        }}
+      >
+        Start swiping
+      </button>
       <div class="mb" style="margin-top: 40px;">
         (To change your profile picture, you need to change it on GitHub then
         logout and login again)
       </div>
       <div>
         <a class="secondary" href="https://github.com/benawad/vsinder/issues">
-          report a bug
+          Report a bug
         </a>
       </div>
     {/if}
@@ -149,10 +152,10 @@
         on:click={() => {
           tsvscode.postMessage({ type: 'delete-account' });
         }}>
-        delete account
+        Delete account
       </SmallButton>
     </div>
   </div>
 {:else}
-  <div>you should never see this :)</div>
+  <div>You should never see this :)</div>
 {/if}

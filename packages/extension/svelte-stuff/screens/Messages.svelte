@@ -169,7 +169,7 @@
               } catch {}
               isLoadingMore = false;
             }}>
-            load more
+            Load more
           </LoadingButton>
         </div>
       {/if}
