@@ -34,7 +34,7 @@ export const MessageIcon: React.FC<MessageIconProps> = ({ size, color }) => {
             justifyContent: "center",
           }}
         >
-          <MyText>{data.user.unreadMatchUserIds.length}</MyText>
+          <MyText>{data.user.unreadMatchUserIds.length > 9 ? '9+' : data.user.unreadMatchUserIds.length}</MyText>
         </View>
       ) : null}
     </View>
